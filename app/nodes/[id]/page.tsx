@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { Node, Relation } from '@/types/node'
 import { getNode, deleteNode } from '@/lib/actions/node'
-import { getRelations } from '@/lib/actions/relation'
+import { getRelations, deleteRelation } from '@/lib/actions/relation'
 import { useNodeStore } from '@/lib/stores/nodeStore'
+import { AddRelationModal } from '@/components/AddRelationModal'
 import Link from 'next/link'
 import { ChevronLeft, Edit, Trash2, Plus } from 'lucide-react'
 
@@ -41,8 +42,18 @@ export default function NodeDetailPage() {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [isDeleting, setIsDeleting] = useState(false)
+  const [isAddRelationModalOpen, setIsAddRelationModalOpen] = useState(false)
 
   const removeNode = useNodeStore((state) => state.removeNode)
+
+  const refreshRelations = async () => {
+    try {
+      const relationsData = await getRelations(nodeId)
+      setRelations(relationsData)
+    } catch (err) {
+      console.error('Failed to refresh relations:', err)
+    }
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -224,40 +235,66 @@ export default function NodeDetailPage() {
             관련 항목 ({relations.length})
           </h3>
           <div className="space-y-3">
-            {relations.map((relation) => (
-              <div
-                key={relation.id}
-                className="p-3 bg-slate-50 dark:bg-slate-700 rounded border border-slate-200 dark:border-slate-600 flex justify-between items-center"
-              >
-                <div className="flex-1">
-                  <p className="text-sm text-slate-600 dark:text-slate-400">
-                    {relation.from_node_id === nodeId ? '→' : '←'} {relation.relation_type}
-                  </p>
-                </div>
-                <button
-                  onClick={() => {
-                    // 삭제 기능은 Phase 5에서 구현
-                  }}
-                  className="text-slate-500 dark:text-slate-400 hover:text-red-600 dark:hover:text-red-400 transition"
+            {relations.map((relation) => {
+              const relatedNodeId = relation.from_node_id === nodeId ? relation.to_node_id : relation.from_node_id
+              const isOutgoing = relation.from_node_id === nodeId
+
+              return (
+                <div
+                  key={relation.id}
+                  className="p-3 bg-slate-50 dark:bg-slate-700 rounded border border-slate-200 dark:border-slate-600 flex justify-between items-center hover:bg-slate-100 dark:hover:bg-slate-600 transition"
                 >
-                  ✕
-                </button>
-              </div>
-            ))}
+                  <Link
+                    href={`/nodes/${relatedNodeId}`}
+                    className="flex-1 flex items-center gap-2 text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition"
+                  >
+                    <span className="text-sm text-slate-600 dark:text-slate-400">
+                      {isOutgoing ? '→' : '←'}
+                    </span>
+                    <span className="text-sm font-medium">{relation.relation_type}</span>
+                  </Link>
+                  <button
+                    onClick={async () => {
+                      if (confirm('이 관계를 삭제하시겠습니까?')) {
+                        try {
+                          await deleteRelation(
+                            relation.from_node_id,
+                            relation.to_node_id,
+                            relation.relation_type
+                          )
+                          await refreshRelations()
+                        } catch (err) {
+                          setError(err instanceof Error ? err.message : '삭제 중 오류 발생')
+                        }
+                      }
+                    }}
+                    className="text-slate-500 dark:text-slate-400 hover:text-red-600 dark:hover:text-red-400 transition ml-2 flex-shrink-0"
+                  >
+                    ✕
+                  </button>
+                </div>
+              )
+            })}
           </div>
         </div>
       )}
 
       {/* 관련 항목 추가 버튼 */}
       <button
-        onClick={() => {
-          // 관련 항목 추가는 Phase 5에서 구현
-        }}
+        onClick={() => setIsAddRelationModalOpen(true)}
         className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 bg-slate-50 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-lg border border-slate-200 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 transition"
       >
         <Plus size={18} />
         관련 항목 추가
       </button>
+
+      {/* Relation 추가 모달 */}
+      <AddRelationModal
+        nodeId={nodeId}
+        isOpen={isAddRelationModalOpen}
+        onClose={() => setIsAddRelationModalOpen(false)}
+        onSuccess={refreshRelations}
+      />
     </div>
   )
 }
