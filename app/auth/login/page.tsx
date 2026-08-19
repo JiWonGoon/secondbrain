@@ -2,11 +2,9 @@
 
 import { signIn } from '@/lib/actions/auth'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 export default function LoginPage() {
-  useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
@@ -18,9 +16,12 @@ export default function LoginPage() {
     setIsLoading(true)
 
     try {
-      await signIn(email, password)
+      const result = await signIn(email, password)
+      // signIn에서 redirect되므로 여기는 실행되지 않음
+      console.log('Login result:', result)
     } catch (err) {
-      setError(err instanceof Error ? err.message : '로그인 중 오류가 발생했습니다.')
+      const errorMessage = err instanceof Error ? err.message : '로그인 중 오류가 발생했습니다.'
+      setError(errorMessage)
       setIsLoading(false)
     }
   }

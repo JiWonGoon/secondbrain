@@ -27,7 +27,7 @@ export async function signIn(email: string, password: string) {
   })
 
   if (error) {
-    return { error: error.message }
+    throw new Error(error.message)
   }
 
   redirect('/dashboard')
