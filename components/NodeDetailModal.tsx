@@ -31,6 +31,13 @@ const typeLabels: Record<NodeType, string> = {
   person: '사람',
 }
 
+const priorityLabels: Record<string, string> = {
+  urgent: '긴급',
+  high: '높음',
+  medium: '중간',
+  low: '낮음',
+}
+
 const typeColors: Record<string, { bg: string; text: string; darkBg: string }> = {
   task: { bg: 'bg-blue-50', text: 'text-blue-700', darkBg: 'dark:bg-blue-900' },
   note: { bg: 'bg-purple-50', text: 'text-purple-700', darkBg: 'dark:bg-purple-900' },
@@ -513,7 +520,7 @@ export function NodeDetailModal({ nodeId, isOpen, onClose }: NodeDetailModalProp
                         {formData.priority && (
                           <div className="flex justify-between">
                             <span className="text-slate-600 dark:text-slate-400">우선순위:</span>
-                            <span className="text-slate-900 dark:text-white font-medium">{formData.priority}</span>
+                            <span className="text-slate-900 dark:text-white font-medium">{priorityLabels[formData.priority] || formData.priority}</span>
                           </div>
                         )}
                         {formData.dueDate && (
