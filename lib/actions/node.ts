@@ -148,11 +148,11 @@ export async function searchNodes(
 
   let queryBuilder = supabase.from('nodes').select('*')
 
-  // 텍스트 검색 (제목, 내용, 요약)
+  // 텍스트 검색 (제목, 내용, 요약, 태그)
   if (query.trim()) {
     const searchTerm = `%${query}%`
     queryBuilder = queryBuilder.or(
-      `title.ilike.${searchTerm},content.ilike.${searchTerm},summary.ilike.${searchTerm}`
+      `title.ilike.${searchTerm},content.ilike.${searchTerm},summary.ilike.${searchTerm},tags.cs.{"${query}"}`
     )
   }
 
