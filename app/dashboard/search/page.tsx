@@ -255,11 +255,11 @@ export default function SearchPage() {
             </div>
 
             {/* Tag 필터 */}
-            <div>
+            <div className="space-y-2">
               <label className="block text-sm font-medium text-slate-900 dark:text-white mb-2">
                 태그
               </label>
-              <div className="flex gap-2 mb-2">
+              <div className="flex gap-2">
                 <input
                   type="text"
                   value={tagInput}
@@ -275,13 +275,13 @@ export default function SearchPage() {
                 />
                 <button
                   onClick={handleAddTag}
-                  className="px-3 py-2 bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-white rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition font-medium"
+                  className="px-3 py-2 bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-white rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition font-medium whitespace-nowrap"
                 >
                   추가
                 </button>
               </div>
               {filters.tags.length > 0 && (
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 pt-2">
                   {filters.tags.map((tag) => (
                     <div
                       key={tag}
