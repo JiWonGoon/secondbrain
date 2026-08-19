@@ -148,13 +148,13 @@ types/
 - [x] Relation 추가 UI (AddRelationModal)
 - [x] Relation 삭제 UI
 
-### Phase 6 - Search & Filter (우선순위: 중간) - **⏳ 준비 중**
-- [ ] 검색 기능 (PostgreSQL ILIKE)
-- [ ] Type 필터
-- [ ] Status 필터
-- [ ] Tag 필터
-- [ ] Priority 필터
-- [ ] Due Date 필터
+### 🟢 Phase 6 - Search & Filter (우선순위: 중간) - **⏳ 진행 중**
+- [x] 검색 기능 (PostgreSQL ILIKE + 태그 검색)
+- [x] Type 필터
+- [x] Status 필터
+- [x] Tag 필터
+- [x] Priority 필터
+- [x] Due Date 필터
 
 ### Phase 7 - Explore (우선순위: 중간)
 - [ ] 전체 항목 탐색 페이지
