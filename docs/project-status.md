@@ -1,8 +1,8 @@
 # SecondBrain - 프로젝트 진행 상태
 
 **마지막 업데이트**: 2026-08-19  
-**현재 세션**: Session 2  
-**전체 진행도**: 50% (Phase 1-5 완료)
+**현재 세션**: Session 2 - 완료  
+**전체 진행도**: 55% (Phase 1-5 완료 + Phase 6 진행 중)
 
 ---
 
@@ -34,8 +34,15 @@
 
 ### 🟢 Phase 5: Node CRUD - **✅ 완료**
 - 완료: 2026-08-19
-- 커밋: `f6e489f`, `86a0072`
-- 구현: Node Detail, Edit, Delete, Relation 추가/삭제
+- 커밋: `f6e489f`, `86a0072`, `641675e`, `3cd4a43`, `1915316`
+- 구현: Node Detail 모달, Edit (모달 내), Delete, Relation 추가/삭제
+- UI 개선: 모바일 완전 반응형, 모달 팝업 방식, 좌우 스크롤 제거
+
+### 🟡 Phase 6: Search & Filter - **⏳ 진행 중**
+- 시작: 2026-08-19
+- 커밋: `8a93caf`, `3c53f8c`, `e000cad`, `c627a63`, `d86dc3f`
+- 완료: 검색 페이지 (/dashboard/search), 모든 필터 구현, 태그 검색
+- 남음: Explore 페이지, Dashboard 개선
 
 ---
 
@@ -101,60 +108,62 @@ types/
 
 ---
 
-## ❓ 결정되지 않은 사항
+## ❓ 결정되지 않은 사항 (Session 2 현황)
 
-### Phase 5 관련 (Node Detail UI)
+### Phase 5 관련 (완료됨)
+- ✅ **Node Detail 페이지 레이아웃** - 모달 팝업으로 결정
+- ✅ **관련 항목 표시 방식** - 확장/축소 섹션 방식
+- ✅ **Relation 추가/삭제 UI** - 모달 창 구현
 
-#### 1. Node Detail 페이지 레이아웃
-- **옵션**:
-  - A) 풀 페이지 상세 보기
-  - B) 모달 팝업
-  - C) 사이드 패널
-- **결정 필요**: 구현 시 결정
+### Phase 6 관련 (진행 중)
 
-#### 2. 관련 항목 표시 방식
-- **옵션**:
-  - A) 카드 그리드
-  - B) 리스트 형식
-  - C) 그래프 시각화
-- **현재 계획**: A 또는 B (그래프는 나중에)
-- **결정 필요**: Phase 5 시작 시
+#### 1. Explore 페이지 구현 방식
+- **현재 계획**: 전체 항목 탐색 + 타입별 필터 + 정렬 옵션
+- **결정 필요**: 분할 뷰 필요 여부
 
-#### 3. Relation 추가/삭제 UI
-- **옵션**:
-  - A) 모달 창
-  - B) 인라인 입력
-  - C) 드래그 & 드롭
-- **현재 계획**: A (모달)
-- **결정 필요**: Phase 5에서 결정
+#### 2. Dashboard 콘텐츠
+- "오늘 할 일" 계산 방식 (due_date 기준)
+- "최근 항목" 개수 및 범위
+- 통계/집계 표시 방식
 
-### Phase 6-9 관련
+### Phase 7-9 관련
 
-#### 검색/필터 위치
-- 헤더 vs 사이드바
+#### AI 자동 분류 시점
+- 입력 직후 바로 제안 vs 별도 페이지에서 수동 트리거
 
-#### Dashboard 콘텐츠
-- "오늘 할 일" 계산 방식
-- "최근 항목" 개수
+#### 알림 시스템
+- due_date 기반 알림 구현 여부
+- 우선순위별 알림 필터링
 
 ---
 
 ## 🔄 남은 작업
 
-### Phase 5 - Node CRUD (우선순위: 높음) ✅
-- [x] Node Detail 페이지 (`/nodes/[id]/page.tsx`)
-- [x] Node Edit 기능 (`/nodes/[id]/edit/page.tsx`)
-- [x] Node Delete 기능 (확인 모달)
-- [x] Relation 추가 UI (AddRelationModal)
-- [x] Relation 삭제 UI
+### Phase 5 - Node CRUD ✅ 완료
+- [x] Node Detail 모달 (`/app/nodes/[id]/page.tsx`)
+- [x] Node Edit (모달 내 편집)
+- [x] Node Delete
+- [x] Relation 추가/삭제 UI
+- [x] 모바일 완전 반응형 UI
+- [x] 다크모드/라이트모드 토글
 
-### 🟢 Phase 6 - Search & Filter (우선순위: 중간) - **⏳ 진행 중**
-- [x] 검색 기능 (PostgreSQL ILIKE + 태그 검색)
-- [x] Type 필터
+### Phase 6 - Search & Filter (우선순위: 중간) - **⏳ 진행 중**
+
+#### 구현 완료
+- [x] 검색 페이지 (`/app/dashboard/search/page.tsx`)
+- [x] PostgreSQL ILIKE 검색 + 태그 검색
+- [x] Type 필터 (8가지 타입)
 - [x] Status 필터
-- [x] Tag 필터
-- [x] Priority 필터
-- [x] Due Date 필터
+- [x] Tag 필터 (여러 개 선택)
+- [x] Priority 필터 (4가지)
+- [x] Due Date 필터 (범위)
+- [x] 헤더에 검색 링크 추가
+- [x] 대시보드 메뉴 업데이트
+
+#### 남은 작업
+- [ ] Explore 페이지 (`/app/dashboard/explore/page.tsx`)
+- [ ] 전체 항목 탐색
+- [ ] 통계/집계
 
 ### Phase 7 - Explore (우선순위: 중간)
 - [ ] 전체 항목 탐색 페이지
@@ -193,47 +202,37 @@ types/
 
 ## 🚀 다음 세션에서 시작할 작업
 
-### Phase 6 - Search & Filter (즉시 시작 가능)
+### Phase 6 - Search & Filter 마무리 + Phase 7 시작
 
-#### 1. 검색 페이지
-```
-파일: /app/search/page.tsx
-구현:
-- 검색 입력창
-- PostgreSQL ILIKE 기반 검색
-- 검색 결과 표시
-- 검색 쿼리 구현
-```
+#### Phase 6 남은 작업
+1. **Explore 페이지** (`/app/dashboard/explore/page.tsx`)
+   - 전체 항목 탐색 뷰
+   - 타입별 필터
+   - 상태별 필터
+   - 정렬 옵션 (생성일, 수정일, 우선순위)
 
-#### 2. 필터 기능
-```
-파일: /components/SearchFilters.tsx
-구현:
-- Type 필터
-- Status 필터
-- Tag 필터
-- Priority 필터
-- Due Date 필터
-- 필터 조합 로직
-```
+2. **검색 페이지 추가 개선**
+   - 최근 검색 저장
+   - 인기 검색어 (선택사항)
 
-#### 3. Explore 페이지
-```
-파일: /app/explore/page.tsx
-구현:
-- 모든 항목 표시
-- 타입별 필터
-- 상태별 필터
-- 정렬 옵션 (생성일, 수정일, 우선순위)
-```
+### Phase 7 - Explore (우선순위: 중간)
+1. **Explore 페이지 구현** (`/app/dashboard/explore/page.tsx`)
+2. **필터 및 정렬 기능**
+3. **항목 그룹화/집계**
 
-### 체크리스트
-- [ ] 검색 페이지 구현
-- [ ] 필터 기능 구현
+### Phase 8 - Dashboard (우선순위: 중간)
+1. **오늘 할 일** (due_date 기준)
+2. **예정된 할 일** (다가오는 일정)
+3. **최근 추가/수정 항목**
+4. **진행 중인 프로젝트**
+5. **통계 위젯**
+
+### 체크리스트 (Session 3)
 - [ ] Explore 페이지 구현
-- [ ] 검색 결과 테스트
-- [ ] 다크모드에서 UI 확인
-- [ ] 모바일 UX 확인
+- [ ] Dashboard 위젯 구현
+- [ ] 모바일 Explore UX 테스트
+- [ ] 다크모드 UI 확인
+- [ ] 성능 최적화 (pagination 검토)
 
 ---
 
@@ -299,21 +298,49 @@ types/
 
 ---
 
-## 📈 GitHub 커밋 히스토리
+## 📈 GitHub 커밋 히스토리 (Session 2)
 
 ```
+d86dc3f - UI 수정: 대시보드 메뉴 업데이트, 헤더 반응형 개선, 태그 입력창 스타일 수정
+c627a63 - 프로젝트 상태 업데이트: Phase 6 진행 중
+e000cad - 메인 페이지 설명 업데이트: 현재 구현된 기능 반영
+3c53f8c - 검색 기능 개선: 태그 검색 포함
+8a93caf - Phase 6 - Search & Filter 구현: 검색 페이지, 고급 필터, 텍스트 검색 기능 추가
+1915316 - 모바일 좌우 스크롤 문제 완전히 해결: overflow-hidden 추가, w-screen 적용, 패딩 최소화
+3cd4a43 - 모바일 UI 개선: 반응형 디자인 적용, 좌우 스크롤 제거, 모달 화면 크기 최적화
+641675e - UI 개선: Node Detail을 모달 팝업으로 변경, 모달 내에서 편집 가능하도록 수정
+858e60d - 프로젝트 상태 업데이트 (Phase 5 완료, 50% 진행)
 f6e489f - Relation 추가/삭제 UI 구현
 86a0072 - Phase 5 - Node CRUD 구현 (Detail, Edit, Delete)
-9086d05 - Docker & DevOps 작업 항목 추가
-07e51b8 - 프로젝트 상태 정리 (Phase 1-4 완료, 40% 진행)
-0f5519c - 테마 토글 기능 수정
-00aa027 - UI/UX 개선사항 적용 (날짜/시간, 다크모드)
-e553c76 - Phase 4 - Inbox / Quick Capture 완료
-c57dbd3 - Phase 3 - Database & RLS 완료
-aaa5375 - Phase 2 - Authentication 완료
-7c6c95c - Phase 1 - 프로젝트 초기 설정 완료
 ```
 
 ---
 
-**Phase 5 - Node CRUD가 완료되었습니다! 다음 세션에서 Phase 6 - Search & Filter를 시작합니다!** 🚀
+## 📊 Session 2 최종 요약
+
+### ✅ 완료된 작업
+1. **Phase 5 - Node CRUD** (100% 완료)
+   - Node Detail 모달 팝업 (편집 기능 포함)
+   - Node 수정/삭제
+   - Relation 추가/삭제
+   - 모바일 완전 반응형 UI
+
+2. **Phase 6 - Search & Filter** (80% 진행 중)
+   - 검색 페이지 구현
+   - 모든 필터 기능 (Type, Status, Tag, Priority, Due Date)
+   - 태그 검색 지원
+   - 대시보드 메뉴 통합
+
+3. **UI/UX 개선**
+   - 모바일 좌우 스크롤 완전 제거
+   - 헤더 반응형 개선
+   - 다크모드/라이트모드 안정화
+
+### 🎯 진행도
+- **Session 1**: 40% (Phase 1-4)
+- **Session 2**: 55% (Phase 1-5 + Phase 6 80%)
+
+### 🚀 다음 세션 (Session 3)
+1. Phase 6 마무리 (Explore 페이지)
+2. Phase 7 시작 (전체 항목 탐색)
+3. Phase 8 시작 (Dashboard 개선)
