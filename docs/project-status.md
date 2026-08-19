@@ -181,6 +181,13 @@ types/
 - [ ] 외부 서비스 연동
 - [ ] 모바일 네이티브 앱
 
+### Docker & DevOps (MVP 완성 후)
+- [ ] Dockerfile 작성 (Next.js)
+- [ ] docker-compose.yml 작성 (Supabase + Next.js)
+- [ ] GitHub Actions CI/CD 파이프라인
+- [ ] 로컬 개발 환경 컨테이너화
+- [ ] 프로덕션 배포 자동화
+
 ---
 
 ## 🚀 다음 세션에서 시작할 작업
