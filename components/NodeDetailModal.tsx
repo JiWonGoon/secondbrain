@@ -189,8 +189,8 @@ export function NodeDetailModal({ nodeId, isOpen, onClose }: NodeDetailModalProp
 
   if (isLoading) {
     return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end md:items-center justify-center z-50 p-0 md:p-4">
-        <div className="bg-white dark:bg-slate-800 rounded-t-lg md:rounded-lg w-full md:max-w-2xl max-h-[90vh] overflow-hidden flex flex-col md:max-h-[90vh]">
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end md:items-center justify-center z-50 p-0 md:p-4 overflow-hidden">
+        <div className="bg-white dark:bg-slate-800 rounded-t-lg md:rounded-lg w-screen md:w-full md:max-w-2xl h-screen md:h-auto md:max-h-[90vh] overflow-hidden flex flex-col">
           <div className="p-6 space-y-4">
             <div className="h-8 bg-slate-200 dark:bg-slate-700 rounded w-1/3 animate-pulse" />
             <div className="h-32 bg-slate-200 dark:bg-slate-700 rounded animate-pulse" />
@@ -203,8 +203,8 @@ export function NodeDetailModal({ nodeId, isOpen, onClose }: NodeDetailModalProp
 
   if (error && !node) {
     return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end md:items-center justify-center z-50 p-0 md:p-4">
-        <div className="bg-white dark:bg-slate-800 rounded-t-lg md:rounded-lg w-full md:max-w-2xl p-6">
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end md:items-center justify-center z-50 p-0 md:p-4 overflow-hidden">
+        <div className="bg-white dark:bg-slate-800 rounded-t-lg md:rounded-lg w-screen md:w-full md:max-w-2xl h-screen md:h-auto md:max-h-[90vh] overflow-hidden flex flex-col p-3 md:p-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg md:text-xl font-semibold text-slate-900 dark:text-white">오류</h2>
             <button onClick={onClose} className="text-slate-400 hover:text-slate-600">
@@ -224,16 +224,16 @@ export function NodeDetailModal({ nodeId, isOpen, onClose }: NodeDetailModalProp
 
   return (
     <>
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end md:items-center justify-center z-50 p-0 md:p-4 overflow-y-auto">
-        <div className="bg-white dark:bg-slate-800 rounded-t-lg md:rounded-lg w-full md:max-w-2xl h-screen md:h-auto md:max-h-[90vh] overflow-hidden flex flex-col">
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end md:items-center justify-center z-50 p-0 md:p-4 overflow-hidden">
+        <div className="bg-white dark:bg-slate-800 rounded-t-lg md:rounded-lg w-screen md:w-full md:max-w-2xl h-screen md:h-auto md:max-h-[90vh] overflow-hidden flex flex-col">
           {/* 헤더 */}
-          <div className="flex items-start justify-between p-4 md:p-6 border-b border-slate-200 dark:border-slate-700 gap-2 flex-shrink-0">
-            <div className="flex-1 min-w-0">
-              <h2 className="text-lg md:text-2xl font-bold text-slate-900 dark:text-white line-clamp-2 break-words">
+          <div className="flex items-start justify-between p-3 md:p-6 border-b border-slate-200 dark:border-slate-700 gap-2 flex-shrink-0">
+            <div className="flex-1 min-w-0 pr-2">
+              <h2 className="text-base md:text-2xl font-bold text-slate-900 dark:text-white line-clamp-2 break-words">
                 {formData.title}
               </h2>
             </div>
-            <div className="flex gap-1 md:gap-2 flex-shrink-0">
+            <div className="flex gap-1 md:gap-2 flex-shrink-0 ml-auto">
               {!isEditing && (
                 <>
                   <button
@@ -269,7 +269,7 @@ export function NodeDetailModal({ nodeId, isOpen, onClose }: NodeDetailModalProp
           </div>
 
           {/* 콘텐츠 */}
-          <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-3 md:space-y-4">
+          <div className="flex-1 overflow-y-auto p-3 md:p-6 space-y-2 md:space-y-4 w-full">
             {error && (
               <div className="p-3 bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-800 rounded">
                 <p className="text-red-700 dark:text-red-200 text-sm">{error}</p>
@@ -285,7 +285,7 @@ export function NodeDetailModal({ nodeId, isOpen, onClose }: NodeDetailModalProp
 
             {isEditing ? (
               // 편집 모드
-              <div className="space-y-3 md:space-y-4">
+              <div className="space-y-2 md:space-y-4 w-full">
                 {/* 타입 선택 */}
                 <div>
                   <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">
