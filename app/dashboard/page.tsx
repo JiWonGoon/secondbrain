@@ -35,13 +35,15 @@ export default function DashboardPage() {
           </div>
         </Link>
 
-        <div className="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-6 opacity-50">
-          <div className="text-3xl mb-2">📊</div>
-          <h3 className="font-semibold text-slate-900 dark:text-white mb-1">분석</h3>
-          <p className="text-sm text-slate-600 dark:text-slate-400">
-            Phase 8에서 구현 예정
-          </p>
-        </div>
+        <Link href="/dashboard/explore">
+          <div className="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-600 hover:shadow-md transition p-6 cursor-pointer">
+            <div className="text-3xl mb-2">📊</div>
+            <h3 className="font-semibold text-slate-900 dark:text-white mb-1">전체 항목</h3>
+            <p className="text-sm text-slate-600 dark:text-slate-400">
+              전체 항목 탐색 및 통계
+            </p>
+          </div>
+        </Link>
       </div>
     </div>
   )
