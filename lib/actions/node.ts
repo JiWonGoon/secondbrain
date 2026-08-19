@@ -192,3 +192,80 @@ export async function searchNodes(
 
   return data as Node[]
 }
+
+export async function getTodayTasks() {
+  const supabase = await createClient()
+
+  const today = new Date().toISOString().split('T')[0]
+
+  const { data, error } = await supabase
+    .from('nodes')
+    .select('*')
+    .eq('type', 'task')
+    .eq('due_date', today)
+    .order('priority', { ascending: false })
+
+  if (error) {
+    throw new Error(`오늘 할 일 조회 실패: ${error.message}`)
+  }
+
+  return data as Node[]
+}
+
+export async function getUpcomingTasks() {
+  const supabase = await createClient()
+
+  const today = new Date().toISOString().split('T')[0]
+  const thirtyDaysLater = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
+    .toISOString()
+    .split('T')[0]
+
+  const { data, error } = await supabase
+    .from('nodes')
+    .select('*')
+    .eq('type', 'task')
+    .gt('due_date', today)
+    .lte('due_date', thirtyDaysLater)
+    .order('due_date', { ascending: true })
+    .limit(10)
+
+  if (error) {
+    throw new Error(`예정된 할 일 조회 실패: ${error.message}`)
+  }
+
+  return data as Node[]
+}
+
+export async function getRecentNodes(limit = 7) {
+  const supabase = await createClient()
+
+  const { data, error } = await supabase
+    .from('nodes')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .limit(limit)
+
+  if (error) {
+    throw new Error(`최근 항목 조회 실패: ${error.message}`)
+  }
+
+  return data as Node[]
+}
+
+export async function getActiveProjects() {
+  const supabase = await createClient()
+
+  const { data, error } = await supabase
+    .from('nodes')
+    .select('*')
+    .eq('type', 'project')
+    .eq('status', 'active')
+    .order('created_at', { ascending: false })
+    .limit(5)
+
+  if (error) {
+    throw new Error(`진행 중인 프로젝트 조회 실패: ${error.message}`)
+  }
+
+  return data as Node[]
+}
