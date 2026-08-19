@@ -133,3 +133,62 @@ export async function deleteNode(nodeId: string) {
     throw new Error(`Node 삭제 실패: ${error.message}`)
   }
 }
+
+export async function searchNodes(
+  query: string,
+  filters?: {
+    type?: NodeType
+    status?: string
+    tags?: string[]
+    priority?: Priority
+    dueDate?: { from?: string; to?: string }
+  }
+) {
+  const supabase = await createClient()
+
+  let queryBuilder = supabase.from('nodes').select('*')
+
+  // 텍스트 검색 (제목, 내용, 요약)
+  if (query.trim()) {
+    const searchTerm = `%${query}%`
+    queryBuilder = queryBuilder.or(
+      `title.ilike.${searchTerm},content.ilike.${searchTerm},summary.ilike.${searchTerm}`
+    )
+  }
+
+  // Type 필터
+  if (filters?.type) {
+    queryBuilder = queryBuilder.eq('type', filters.type)
+  }
+
+  // Status 필터
+  if (filters?.status) {
+    queryBuilder = queryBuilder.eq('status', filters.status)
+  }
+
+  // Priority 필터
+  if (filters?.priority) {
+    queryBuilder = queryBuilder.eq('priority', filters.priority)
+  }
+
+  // Tag 필터
+  if (filters?.tags && filters.tags.length > 0) {
+    queryBuilder = queryBuilder.contains('tags', filters.tags)
+  }
+
+  // Due Date 필터
+  if (filters?.dueDate?.from) {
+    queryBuilder = queryBuilder.gte('due_date', filters.dueDate.from)
+  }
+  if (filters?.dueDate?.to) {
+    queryBuilder = queryBuilder.lte('due_date', filters.dueDate.to)
+  }
+
+  const { data, error } = await queryBuilder.order('created_at', { ascending: false })
+
+  if (error) {
+    throw new Error(`검색 실패: ${error.message}`)
+  }
+
+  return data as Node[]
+}

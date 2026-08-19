@@ -6,6 +6,7 @@ import { ThemeToggle } from '@/components/ThemeToggle'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { Search as SearchIcon } from 'lucide-react'
 
 export default function DashboardLayout({
   children,
@@ -52,6 +53,13 @@ export default function DashboardLayout({
           </Link>
 
           <div className="flex items-center gap-4">
+            <Link
+              href="/dashboard/search"
+              className="p-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition"
+              title="검색"
+            >
+              <SearchIcon size={20} />
+            </Link>
             <span className="text-sm text-slate-600 dark:text-slate-400">{user?.email}</span>
             <ThemeToggle />
             <button
