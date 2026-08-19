@@ -2,7 +2,7 @@
 
 **마지막 업데이트**: 2026-08-19  
 **현재 세션**: Session 3 - 진행 중  
-**전체 진행도**: 60% (Phase 1-6 완료)
+**전체 진행도**: 70% (Phase 1-7 진행 중)
 
 ---
 
@@ -39,9 +39,8 @@
 - UI 개선: 모바일 완전 반응형, 모달 팝업 방식, 좌우 스크롤 제거
 
 ### 🟢 Phase 6: Search & Filter - **✅ 완료**
-- 시작: 2026-08-19
 - 완료: 2026-08-19
-- 커밋: `8a93caf`, `3c53f8c`, `e000cad`, `c627a63`, `d86dc3f`, `122180e`
+- 커밋: `8a93caf`, `3c53f8c`, `e000cad`, `c627a63`, `d86dc3f`, `122180e`, `cace741`
 - 구현:
   - 검색 페이지 (`/dashboard/search`): 텍스트 검색 + 모든 필터
   - Explore 페이지 (`/dashboard/explore`): 전체 항목 탐색 + 통계 + 정렬
@@ -51,9 +50,50 @@
   - 다크모드 완전 지원
   - 모바일 반응형
 
+### 🟡 Phase 7: Dashboard 개선 - **⏳ 진행 중**
+- 시작: 2026-08-19
+- 커밋: `751511b`, `64102d2`
+- 구현 완료:
+  - 대시보드 홈 페이지 개선 (`/app/dashboard/page.tsx`)
+  - 오늘 할 일 섹션 (due_date = 오늘)
+  - 예정된 할 일 섹션 (향후 30일, 최대 10개)
+  - 진행 중인 프로젝트 (status: active, 최대 5개)
+  - 최근 항목 섹션 (모든 타입, 최대 5개)
+  - 빠른 링크 메뉴 (Inbox, 검색, 전체 항목)
+  - Dashboard 상단 "빠른 입력" 버튼 추가
+  - Quick Capture 모달 팝업 (모달 형태로 통합)
+  - Ctrl+Enter 단축키 지원
+  - 다크모드 완전 지원
+  - 반응형 UI
+
+- 남은 작업:
+  - [ ] 모바일 테스트 및 최적화
+  - [ ] 성능 최적화 (로딩 시간 개선)
+
 ---
 
-## ✅ 완료된 결정 사항
+## ✅ 완료된 결정 사항 (Session 3 확정)
+
+### Phase 7 관련 (Session 3)
+- ✅ **Dashboard 콘텐츠 구성**
+  - 오늘 할 일: due_date가 오늘인 task
+  - 예정된 할 일: 향후 30일 내 task (최대 10개)
+  - 진행 중인 프로젝트: status: active (최대 5개)
+  - 최근 항목: 모든 타입 (최대 5개)
+  
+- ✅ **Quick Capture 통합 위치**
+  - Dashboard 상단 우측에 "빠른 입력" 버튼 배치
+  - 모달 팝업 형태로 통합
+  - Ctrl+Enter 단축키 지원
+
+- ✅ **Dashboard 레이아웃**
+  - 반응형 그리드 (모바일 1열 → 태블릿 2열 → 데스크톱 3열)
+  - 섹션별 "모두 보기" 링크 (Explore/Search로 이동)
+  - 빠른 링크 메뉴 하단 배치
+
+---
+
+## ✅ 완료된 결정 사항 (Session 1-2)
 
 ### 데이터 모델 (확정)
 - **Node 타입**: 8가지 (task, note, book, place, study, project, idea, person)
@@ -115,88 +155,98 @@ types/
 
 ---
 
-## ❓ 결정되지 않은 사항 (Session 2 현황)
+## ❓ 결정되지 않은 사항 (Session 3 현황)
 
-### Phase 5 관련 (완료됨)
-- ✅ **Node Detail 페이지 레이아웃** - 모달 팝업으로 결정
-- ✅ **관련 항목 표시 방식** - 확장/축소 섹션 방식
-- ✅ **Relation 추가/삭제 UI** - 모달 창 구현
+### Phase 7 관련 (Session 3)
 
-### Phase 6 관련 (진행 중)
+#### 1. Dashboard 성능 최적화
+- 로딩 시간 개선 필요 여부
+- Pagination 도입 시기 (현재: 각 섹션 최대 5-10개)
+- 캐싱 전략
 
-#### 1. Explore 페이지 구현 방식
-- **현재 계획**: 전체 항목 탐색 + 타입별 필터 + 정렬 옵션
-- **결정 필요**: 분할 뷰 필요 여부
+#### 2. 추가 통계 위젯
+- 주간/월간 분석 데이터 표시 여부
+- 우선순위별 task 분포도
 
-#### 2. Dashboard 콘텐츠
-- "오늘 할 일" 계산 방식 (due_date 기준)
-- "최근 항목" 개수 및 범위
-- 통계/집계 표시 방식
-
-### Phase 7-9 관련
+### Phase 8-9 관련
 
 #### AI 자동 분류 시점
 - 입력 직후 바로 제안 vs 별도 페이지에서 수동 트리거
+- Suggestion 모달 UX 디자인
 
 #### 알림 시스템
 - due_date 기반 알림 구현 여부
 - 우선순위별 알림 필터링
+
+#### Phase 10 (Polish)
+- PWA 설정 시기
+- 성능 최적화 우선순위
 
 ---
 
 ## 🔄 남은 작업
 
 ### Phase 5 - Node CRUD ✅ 완료
-- [x] Node Detail 모달 (`/app/nodes/[id]/page.tsx`)
+- [x] Node Detail 모달
 - [x] Node Edit (모달 내 편집)
 - [x] Node Delete
 - [x] Relation 추가/삭제 UI
 - [x] 모바일 완전 반응형 UI
-- [x] 다크모드/라이트모드 토글
 
-### Phase 6 - Search & Filter (우선순위: 중간) - **⏳ 진행 중**
+### Phase 6 - Search & Filter ✅ 완료
+- [x] 검색 페이지
+- [x] Explore 페이지 (전체 항목 탐색 + 통계 + 정렬)
+- [x] 모든 필터 구현 (Type, Status, Priority, Tag, Due Date)
+- [x] 다크모드 완전 지원
+
+### Phase 7 - Dashboard 개선 ⏳ 진행 중
 
 #### 구현 완료
-- [x] 검색 페이지 (`/app/dashboard/search/page.tsx`)
-- [x] PostgreSQL ILIKE 검색 + 태그 검색
-- [x] Type 필터 (8가지 타입)
-- [x] Status 필터
-- [x] Tag 필터 (여러 개 선택)
-- [x] Priority 필터 (4가지)
-- [x] Due Date 필터 (범위)
-- [x] 헤더에 검색 링크 추가
-- [x] 대시보드 메뉴 업데이트
+- [x] Dashboard 홈 개선 (`/app/dashboard/page.tsx`)
+- [x] 오늘 할 일 섹션
+- [x] 예정된 할 일 섹션 (향후 30일)
+- [x] 진행 중인 프로젝트 섹션
+- [x] 최근 항목 섹션
+- [x] Quick Capture 버튼 추가
+- [x] Quick Capture 모달 팝업
+- [x] Ctrl+Enter 단축키
+- [x] 반응형 UI
+- [x] 다크모드 완전 지원
 
 #### 남은 작업
-- [ ] Explore 페이지 (`/app/dashboard/explore/page.tsx`)
-- [ ] 전체 항목 탐색
-- [ ] 통계/집계
+- [ ] 모바일 테스트 및 최적화
+- [ ] 성능 최적화 (로딩 시간 개선)
 
-### Phase 7 - Explore (우선순위: 중간)
-- [ ] 전체 항목 탐색 페이지
-- [ ] 타입별 필터
-- [ ] 통계/집계
-
-### Phase 8 - Dashboard (우선순위: 중간)
-- [ ] 오늘 할 일
-- [ ] 예정된 할 일
-- [ ] 최근 추가한 항목
-- [ ] 최근 수정한 항목
-- [ ] 진행 중인 프로젝트
-
-### Phase 9 - AI Integration (우선순위: 낮음)
-- [ ] 자동 분류
+### Phase 8 - AI Integration (우선순위: 중간)
+- [ ] 자동 Type 제안
 - [ ] 제목 제안
 - [ ] Summary 생성
 - [ ] Tag 추천
-- [ ] 관련 항목 후보
+- [ ] 관련 Node 후보 추천
+- [ ] Suggested Task
+- [ ] 승인/무시 UX
+- [ ] AI 결과 서버 검증
 
-### Phase 10 이후 (Future)
+### Phase 9 - Polish (우선순위: 중간)
+- [ ] PWA 설정
+- [ ] Mobile UX 완성
+- [ ] Desktop UX 완성
+- [ ] Loading State
+- [ ] Empty State
+- [ ] Error State
+- [ ] Accessibility
+- [ ] Performance
+- [ ] UX 개선
+
+### Phase 10 이후 (Future - MVP 완성 후)
 - [ ] Graph View
 - [ ] Semantic Search + pgvector
-- [ ] 복잡한 AI 자동화
+- [ ] Knowledge Graph
+- [ ] Calendar View
+- [ ] Kanban View
+- [ ] AI Assistant (대화형)
+- [ ] Daily/Weekly/Monthly Review
 - [ ] 외부 서비스 연동
-- [ ] 모바일 네이티브 앱
 
 ### Docker & DevOps (MVP 완성 후)
 - [ ] Dockerfile 작성 (Next.js)
@@ -207,32 +257,41 @@ types/
 
 ---
 
-## 🚀 다음 작업 (Phase 7 이후)
+## 🚀 다음 세션에서 시작할 작업 (Session 4)
 
-### Phase 7 - Dashboard 개선 (우선순위: 높음)
-1. **대시보드 개선** (`/app/dashboard/page.tsx`)
-   - 오늘 할 일 (due_date 기준)
-   - 예정된 할 일 (다가오는 일정)
-   - 최근 추가 항목
-   - 최근 수정 항목
-   - 진행 중인 프로젝트
+### Phase 7 마무리 (우선순위: 높음)
+1. **모바일 테스트 및 최적화**
+   - iPhone 14 Pro Max (430x932) 완벽 대응
+   - 터치 타겟 최소 44px 확인
+   - 스크롤 성능 확인
 
-2. **필터 및 정렬 기능**
-3. **통계 위젯**
+2. **성능 최적화**
+   - 로딩 시간 개선
+   - 서버 액션 최적화
+   - Pagination 필요 여부 검토
 
 ### Phase 8 - AI Integration (우선순위: 중간)
-1. **자동 분류** (AI)
-2. **제목 제안** (AI)
-3. **요약 생성** (AI)
-4. **태그 추천** (AI)
-5. **관련 항목 추천** (AI)
+1. **자동 분류 UI** - Quick Capture 후 AI 제안 표시
+2. **제목 제안** - AI가 생성한 제목 제안
+3. **Summary 생성** - 자동 요약
+4. **Tag 추천** - 기존 tag 기반 추천
+5. **관련 항목 후보** - 관련 Node 추천
+6. **Suggestion 승인/무시 UX** - 사용자 선택
+7. **AI 결과 서버 검증** - Zod 스키마
 
-### 체크리스트 (Session 3 이후)
+### Phase 9 - Polish (우선순위: 중간)
+1. **PWA 설정**
+2. **Mobile/Desktop UX 완성**
+3. **Loading/Empty/Error State**
+4. **Accessibility**
+5. **Performance 최적화**
+
+### 체크리스트 (Session 3)
 - [x] Phase 6 완료 (Explore 페이지 구현)
-- [ ] Phase 7 시작 (Dashboard 개선)
-- [ ] 모바일 Dashboard UX 테스트
-- [ ] 다크모드 UI 확인
-- [ ] 성능 최적화 (pagination 검토)
+- [x] Phase 7 진행 중 (Dashboard 개선 + Quick Capture)
+- [ ] Phase 7 테스트 (모바일 + 성능)
+- [ ] Phase 8 시작 (AI Integration)
+- [ ] Phase 9 시작 (Polish)
 
 ---
 
@@ -283,64 +342,56 @@ types/
 
 ---
 
-## 🎯 최종 상태
+## 🎯 현재 상태 (Session 3 기준)
 
 | 항목 | 상태 |
 |------|------|
-| **Phase 1** | ✅ 완료 |
-| **Phase 2** | ✅ 완료 |
-| **Phase 3** | ✅ 완료 |
-| **Phase 4** | ✅ 완료 |
-| **Phase 5** | ✅ 완료 |
-| **UI/UX 개선** | ✅ 완료 |
-| **Phase 6** | ⏳ 준비 중 |
-| **전체 진행도** | 🟢 **50% (Phase 1-5 완료)** |
+| **Phase 1-6** | ✅ 완료 |
+| **Phase 7** | ⏳ 진행 중 (Dashboard 개선 완료, 테스트 남음) |
+| **Phase 8-9** | 🔜 예정 |
+| **전체 진행도** | 🟡 **70% (Phase 1-6 완료 + Phase 7 진행)** |
 
 ---
 
-## 📈 GitHub 커밋 히스토리 (Session 2)
+## 📈 GitHub 커밋 히스토리 (Session 3)
 
 ```
-d86dc3f - UI 수정: 대시보드 메뉴 업데이트, 헤더 반응형 개선, 태그 입력창 스타일 수정
-c627a63 - 프로젝트 상태 업데이트: Phase 6 진행 중
-e000cad - 메인 페이지 설명 업데이트: 현재 구현된 기능 반영
-3c53f8c - 검색 기능 개선: 태그 검색 포함
-8a93caf - Phase 6 - Search & Filter 구현: 검색 페이지, 고급 필터, 텍스트 검색 기능 추가
-1915316 - 모바일 좌우 스크롤 문제 완전히 해결: overflow-hidden 추가, w-screen 적용, 패딩 최소화
-3cd4a43 - 모바일 UI 개선: 반응형 디자인 적용, 좌우 스크롤 제거, 모달 화면 크기 최적화
-641675e - UI 개선: Node Detail을 모달 팝업으로 변경, 모달 내에서 편집 가능하도록 수정
-858e60d - 프로젝트 상태 업데이트 (Phase 5 완료, 50% 진행)
-f6e489f - Relation 추가/삭제 UI 구현
-86a0072 - Phase 5 - Node CRUD 구현 (Detail, Edit, Delete)
+64102d2 - Dashboard 상단에 Quick Capture 버튼 추가: 모달 팝업으로 빠른 입력 가능
+751511b - Phase 7 - Dashboard 개선: 오늘 할 일, 예정된 일, 진행 중인 프로젝트, 최근 항목 표시
+cace741 - 프로젝트 상태 업데이트: Phase 6 완료 (60% 진행), Session 3 진행 중
+122180e - Phase 6 - Search & Filter 완료: Explore 페이지 구현 (타입별 필터, 정렬, 통계)
 ```
 
 ---
 
-## 📊 Session 2 최종 요약
+## 📊 Session 3 최종 요약
 
 ### ✅ 완료된 작업
-1. **Phase 5 - Node CRUD** (100% 완료)
-   - Node Detail 모달 팝업 (편집 기능 포함)
-   - Node 수정/삭제
-   - Relation 추가/삭제
-   - 모바일 완전 반응형 UI
+1. **Phase 6 - Search & Filter** (100% 완료)
+   - 검색 페이지 (텍스트 검색 + 모든 필터)
+   - Explore 페이지 (전체 항목 탐색 + 통계 + 정렬)
+   - 다크모드 완전 지원
 
-2. **Phase 6 - Search & Filter** (80% 진행 중)
-   - 검색 페이지 구현
-   - 모든 필터 기능 (Type, Status, Tag, Priority, Due Date)
-   - 태그 검색 지원
-   - 대시보드 메뉴 통합
-
-3. **UI/UX 개선**
-   - 모바일 좌우 스크롤 완전 제거
-   - 헤더 반응형 개선
-   - 다크모드/라이트모드 안정화
+2. **Phase 7 - Dashboard 개선** (진행 중, 구현 80% 완료)
+   - Dashboard 홈 개선
+   - 오늘 할 일 섹션
+   - 예정된 할 일 섹션 (향후 30일)
+   - 진행 중인 프로젝트 섹션
+   - 최근 항목 섹션
+   - Quick Capture 버튼 + 모달 팝업
+   - Ctrl+Enter 단축키 지원
+   - 반응형 UI + 다크모드
 
 ### 🎯 진행도
 - **Session 1**: 40% (Phase 1-4)
-- **Session 2**: 55% (Phase 1-5 + Phase 6 80%)
+- **Session 2**: 60% (Phase 1-6)
+- **Session 3**: 70% (Phase 1-6 완료 + Phase 7 진행)
 
-### 🚀 다음 세션 (Session 3)
-1. Phase 6 마무리 (Explore 페이지)
-2. Phase 7 시작 (전체 항목 탐색)
-3. Phase 8 시작 (Dashboard 개선)
+### ⏳ 남은 Phase 7 작업
+- 모바일 테스트 및 최적화
+- 성능 최적화 (로딩 시간 개선)
+
+### 🚀 다음 세션 (Session 4)
+1. Phase 7 마무리 (테스트 & 성능 최적화)
+2. Phase 8 시작 (AI Integration)
+3. Phase 9 시작 (Polish)
