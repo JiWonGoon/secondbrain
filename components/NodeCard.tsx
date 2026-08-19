@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, memo } from 'react'
 import { Node } from '@/types/node'
 import { NodeDetailModal } from '@/components/NodeDetailModal'
 
@@ -9,7 +9,7 @@ interface NodeCardProps {
   onRefresh?: () => void
 }
 
-export function NodeCard({ node, onRefresh }: NodeCardProps) {
+function NodeCardComponent({ node, onRefresh }: NodeCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleModalClose = () => {
@@ -151,3 +151,11 @@ export function NodeCard({ node, onRefresh }: NodeCardProps) {
     </>
   )
 }
+
+export const NodeCard = memo(NodeCardComponent, (prevProps, nextProps) => {
+  return (
+    prevProps.node.id === nextProps.node.id &&
+    prevProps.node.updated_at === nextProps.node.updated_at &&
+    prevProps.node.tags?.length === nextProps.node.tags?.length
+  )
+})

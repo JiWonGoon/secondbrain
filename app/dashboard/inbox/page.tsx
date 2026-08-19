@@ -30,11 +30,11 @@ export default function InboxPage() {
   }, [setNodes, setLoading])
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       {/* 페이지 헤더 */}
       <div>
-        <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Inbox</h1>
-        <p className="text-slate-600 dark:text-slate-400">
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-2">Inbox</h1>
+        <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
           빠르게 입력한 내용들을 정리하고 분류하세요.
         </p>
       </div>
@@ -44,7 +44,7 @@ export default function InboxPage() {
 
       {/* Inbox 목록 */}
       <div>
-        <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-4">
+        <h2 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white mb-4">
           저장된 항목 ({nodes.length})
         </h2>
 
@@ -55,7 +55,7 @@ export default function InboxPage() {
         )}
 
         {isLoading ? (
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {Array.from({ length: 6 }).map((_, i) => (
               <div
                 key={i}
@@ -65,15 +65,15 @@ export default function InboxPage() {
           </div>
         ) : nodes.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-slate-600 dark:text-slate-400 text-lg mb-2">
+            <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg mb-2">
               아직 저장된 항목이 없습니다.
             </p>
-            <p className="text-slate-500 dark:text-slate-500">
+            <p className="text-sm sm:text-base text-slate-500 dark:text-slate-500">
               위의 입력창에서 생각나는 것을 저장해보세요.
             </p>
           </div>
         ) : (
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {nodes.map((node) => (
               <NodeCard key={node.id} node={node} />
             ))}

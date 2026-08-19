@@ -72,24 +72,27 @@ export default function DashboardPage() {
     loadDashboardData()
   }, [])
 
-  // 노드 스토어 변경 감지 - 타입, 태그, 우선순위, 예정일 변경 시 최근 항목 새로고침
+  // 노드 스토어 변경 감지 - 최근 항목 새로고침
   useEffect(() => {
-    // 스토어의 노드가 변경되면 최근 항목 새로고침
-    const refreshRecentNodes = async () => {
+    if (!nodeStoreNodes || nodeStoreNodes.length === 0) return
+
+    // 스토어의 노드가 변경되면 최근 항목 새로고침 (디바운싱)
+    const timer = setTimeout(async () => {
       try {
         const updated = await getRecentNodes(6)
         setRecentNodes(updated)
       } catch (err) {
         console.error('Failed to refresh recent nodes:', err)
       }
-    }
-    refreshRecentNodes()
+    }, 500) // 500ms 디바운싱
+
+    return () => clearTimeout(timer)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nodeStoreNodes])
 
   if (isLoading) {
     return (
-      <div className="space-y-8">
+      <div className="space-y-6 sm:space-y-8">
         <div>
           <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">대시보드</h1>
           <p className="text-slate-600 dark:text-slate-400">로딩 중...</p>
@@ -104,26 +107,26 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       {/* 페이지 헤더 */}
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">대시보드</h1>
-          <p className="text-slate-600 dark:text-slate-400">오늘의 일과 최근 항목을 확인하세요.</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-2">대시보드</h1>
+          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400">오늘의 일과 최근 항목을 확인하세요.</p>
         </div>
         <button
           onClick={() => setShowQuickCapture(true)}
-          className="flex-shrink-0 mt-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 text-white font-medium rounded-lg transition flex items-center gap-2 whitespace-nowrap"
+          className="flex-shrink-0 w-full sm:w-auto h-12 sm:h-auto px-4 py-3 sm:py-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 text-white font-medium rounded-lg transition flex items-center justify-center sm:justify-start gap-2 whitespace-nowrap"
         >
           <Plus size={20} />
-          빠른 입력
+          <span>빠른 입력</span>
         </button>
       </div>
 
       {/* Quick Capture 모달 */}
       {showQuickCapture && (
-        <div className="fixed inset-0 bg-black/50 dark:bg-black/70 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-slate-800 rounded-lg shadow-xl w-full max-w-md">
+        <div className="fixed inset-0 bg-black/50 dark:bg-black/70 flex items-end sm:items-center justify-center z-50 p-0 sm:p-4">
+          <div className="bg-white dark:bg-slate-800 rounded-t-lg sm:rounded-lg shadow-xl w-full sm:max-w-md max-h-[90vh] sm:max-h-none flex flex-col">
             {/* 모달 헤더 */}
             <div className="flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-700">
               <h2 className="text-xl font-bold text-slate-900 dark:text-white">빠른 입력</h2>
@@ -136,7 +139,7 @@ export default function DashboardPage() {
             </div>
 
             {/* 모달 내용 */}
-            <div className="p-6 space-y-4">
+            <div className="p-4 sm:p-6 space-y-4 flex-1 overflow-y-auto">
               <p className="text-sm text-slate-600 dark:text-slate-400">
                 생각나는 것을 빠르게 입력하세요. 분류는 나중에 할 수 있습니다.
               </p>
@@ -161,17 +164,17 @@ export default function DashboardPage() {
             </div>
 
             {/* 모달 푸터 */}
-            <div className="flex gap-3 p-6 border-t border-slate-200 dark:border-slate-700">
+            <div className="flex gap-3 p-4 sm:p-6 border-t border-slate-200 dark:border-slate-700 flex-shrink-0">
               <button
                 onClick={() => setShowQuickCapture(false)}
-                className="flex-1 px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-white font-medium rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition"
+                className="flex-1 px-4 py-3 sm:py-2 bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-white font-medium rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition min-h-[44px] sm:min-h-auto"
               >
                 취소
               </button>
               <button
                 onClick={handleQuickCapture}
                 disabled={!quickCaptureText.trim() || isSubmitting}
-                className="flex-1 px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 disabled:bg-slate-400 disabled:cursor-not-allowed transition"
+                className="flex-1 px-4 py-3 sm:py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 disabled:bg-slate-400 disabled:cursor-not-allowed transition min-h-[44px] sm:min-h-auto"
               >
                 {isSubmitting ? '저장 중...' : '저장'}
               </button>
@@ -205,7 +208,7 @@ export default function DashboardPage() {
             <p className="text-slate-600 dark:text-slate-400">오늘 D-DAY가 없습니다.</p>
           </div>
         ) : (
-          <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {todayTasks.map((item) => (
               <NodeCard key={item.id} node={item} onRefresh={loadDashboardData} />
             ))}
@@ -231,7 +234,7 @@ export default function DashboardPage() {
             <p className="text-slate-600 dark:text-slate-400">예정된 항목이 없습니다.</p>
           </div>
         ) : (
-          <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {upcomingTasks.map((item) => (
               <NodeCard key={item.id} node={item} onRefresh={loadDashboardData} />
             ))}
@@ -253,7 +256,7 @@ export default function DashboardPage() {
             </Link>
           </div>
 
-          <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {activeProjects.map((project) => (
               <div
                 key={project.id}
@@ -289,7 +292,7 @@ export default function DashboardPage() {
             <p className="text-slate-600 dark:text-slate-400">저장된 항목이 없습니다.</p>
           </div>
         ) : (
-          <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {recentNodes.map((node) => (
               <NodeCard key={node.id} node={node} onRefresh={loadDashboardData} />
             ))}
@@ -300,7 +303,7 @@ export default function DashboardPage() {
       {/* 빠른 링크 */}
       <section>
         <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-4">빠른 링크</h2>
-        <div className="grid gap-3 md:grid-cols-3">
+        <div className="grid gap-3 grid-cols-1 md:grid-cols-3">
           <Link href="/dashboard/inbox">
             <div className="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-600 hover:shadow-md transition p-4 cursor-pointer text-center">
               <div className="text-2xl mb-2">📝</div>

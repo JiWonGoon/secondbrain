@@ -378,3 +378,26 @@ ailed for pack: Error: ENOENT: no such file or directory, rename 'D:\workspaces\
  ✓ Compiled in 290ms (1410 modules)
  ✓ Compiled in 327ms (1253 modules)
  ✓ Compiled in 145ms (480 modules)
+
+> secondbrain@0.1.0 dev
+> next dev
+
+ ⚠ Port 3000 is in use by process 7140, using available port 3001 instead.
+   ▲ Next.js 15.5.23
+   - Local:        http://localhost:3001
+   - Network:      http://172.40.0.138:3001
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 1815ms
+
+> secondbrain@0.1.0 dev
+> next dev
+
+ ⚠ Port 3000 is in use by process 7140, using available port 3002 instead.
+   ▲ Next.js 15.5.23
+   - Local:        http://localhost:3002
+   - Network:      http://172.40.0.138:3002
+   - Environments: .env.local
+
+ ✓ Starting...

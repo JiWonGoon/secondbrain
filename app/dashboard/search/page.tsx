@@ -157,17 +157,17 @@ export default function SearchPage() {
     <div className="space-y-6">
       {/* 페이지 헤더 */}
       <div>
-        <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">검색</h1>
-        <p className="text-slate-600 dark:text-slate-400">
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-2">검색</h1>
+        <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
           저장된 항목을 검색하고 필터링하세요.
         </p>
       </div>
 
       {/* 검색 입력 */}
-      <div className="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-4 space-y-4">
-        <div className="flex gap-2">
+      <div className="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-3 sm:p-4 space-y-4">
+        <div className="flex flex-col sm:flex-row gap-2">
           <div className="flex-1 relative">
-            <Search className="absolute left-3 top-3 text-slate-400 dark:text-slate-500" size={20} />
+            <Search className="absolute left-3 top-3 sm:top-3 text-slate-400 dark:text-slate-500" size={20} />
             <input
               type="text"
               value={query}
@@ -178,13 +178,13 @@ export default function SearchPage() {
                 }
               }}
               placeholder="검색어를 입력하세요..."
-              className="w-full pl-10 pr-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-slate-400 dark:placeholder-slate-500"
+              className="w-full pl-10 pr-4 py-3 sm:py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-slate-400 dark:placeholder-slate-500 h-12 sm:h-auto"
             />
           </div>
           <button
             onClick={handleSearch}
             disabled={isLoading}
-            className="px-6 py-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 text-white font-medium rounded-lg transition disabled:bg-slate-400 disabled:cursor-not-allowed"
+            className="w-full sm:w-auto px-4 sm:px-6 py-3 sm:py-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 text-white font-medium rounded-lg transition disabled:bg-slate-400 disabled:cursor-not-allowed h-12 sm:h-auto"
           >
             {isLoading ? '검색 중...' : '검색'}
           </button>
@@ -301,7 +301,7 @@ export default function SearchPage() {
             </div>
 
             {/* Due Date 필터 */}
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-slate-900 dark:text-white mb-2">
                   예정일 (시작)
@@ -346,12 +346,12 @@ export default function SearchPage() {
 
       {/* 검색 결과 */}
       <div>
-        <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-4">
+        <h2 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white mb-4">
           검색 결과 ({results.length})
         </h2>
 
         {isLoading ? (
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {Array.from({ length: 6 }).map((_, i) => (
               <div
                 key={i}
@@ -361,15 +361,15 @@ export default function SearchPage() {
           </div>
         ) : results.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-slate-600 dark:text-slate-400 text-lg mb-2">
+            <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg mb-2">
               검색 결과가 없습니다.
             </p>
-            <p className="text-slate-500 dark:text-slate-500">
+            <p className="text-sm sm:text-base text-slate-500 dark:text-slate-500">
               다른 검색어나 필터를 시도해보세요.
             </p>
           </div>
         ) : (
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {results.map((node) => (
               <NodeCard key={node.id} node={node} />
             ))}
