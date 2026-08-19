@@ -1,8 +1,8 @@
 # SecondBrain - 프로젝트 진행 상태
 
 **마지막 업데이트**: 2026-08-19  
-**현재 세션**: Session 4 - 진행 중 (Phase 7 마무리)  
-**전체 진행도**: 80% (Phase 1-7 완료, 성능 최적화 완료)
+**현재 세션**: Session 3 완료, Session 4 예정 (Phase 8 - AI Integration)  
+**전체 진행도**: 100% (Phase 1-7 완료)
 
 ---
 
@@ -216,67 +216,46 @@ types/
 
 ---
 
-## 🔧 Session 4 진행 상황 (Phase 7 마무리)
+## 🔧 Session 3 최종 작업 (Phase 7-1 버그 수정 & 최적화)
 
 ### ✅ 완료된 작업
 
-1. **모바일 최적화**
-   - Dashboard 페이지 반응형 레이아웃 개선 (모바일 우선)
-   - 헤더 패딩/폰트 크기 스케일링
-   - 터치 타겟 최소 44px 확보 (버튼 h-12 sm:h-auto)
-   - 모달 팝업 모바일 바텀시트 스타일
-   - Inbox 페이지 모바일 최적화
-   - Search 페이지 모바일 최적화
+1. **Explore 페이지 실시간 업데이트**
+   - Zustand store 연동으로 로컬 state에서 전환
+   - 노드 타입 변경 시 즉시 통계 반영
+   - 필터 클릭 시 페이지 새로고침 없이 결과 변경
+   - useMemo 최적화 적용
 
-2. **성능 최적화**
-   - NodeCard 컴포넌트 React.memo 추가
-   - Dashboard 데이터 갱신 디바운싱 (500ms)
-   - 불필요한 리렌더링 최소화
-   - 레이아웃 개선 (콘텐츠 패딩 조정)
+2. **노드 수정 버그 수정**
+   - 예정일 삭제 시 null로 설정하여 DB에 반영
+   - updateNode 함수 타입 확장 (null 값 지원)
 
-3. **테스트 완료**
+3. **프로필 관리 기능**
+   - 회원가입에 이름 필드 추가 (필수)
+   - 헤더에 이름 표시 (클릭 가능)
+   - ProfileModal 컴포넌트 개발
+   - 이름/비밀번호 수정 기능
+
+4. **모바일 최적화**
+   - 반응형 레이아웃 (모바일 우선 설계)
+   - 터치 타겟 최소 44px 확보
+   - 그리드 레이아웃 통일
+
+5. **성능 최적화**
+   - NodeCard에 React.memo 추가
+   - 데이터 갱신 디바운싱 (500ms)
+   - useMemo 활용
+
+6. **테스트 완료**
    - ✅ ESLint 검사 통과
    - ✅ TypeScript 타입 검사 통과
-   - ✅ 모바일 해상도 레이아웃 검증
+   - ✅ 모바일 레이아웃 검증
 
 ---
 
-## 🔄 남은 작업
+## 📌 현재 Phase: Phase 8 - AI Integration (Session 4에서 시작 예정)
 
-### Phase 5 - Node CRUD ✅ 완료
-- [x] Node Detail 모달
-- [x] Node Edit (모달 내 편집)
-- [x] Node Delete
-- [x] Relation 추가/삭제 UI
-- [x] 모바일 완전 반응형 UI
-
-### Phase 6 - Search & Filter ✅ 완료
-- [x] 검색 페이지
-- [x] Explore 페이지 (전체 항목 탐색 + 통계 + 정렬)
-- [x] 모든 필터 구현 (Type, Status, Priority, Tag, Due Date)
-- [x] 다크모드 완전 지원
-
-### Phase 7 - Dashboard 개선 ✅ 완료
-
-#### 구현 완료
-- [x] Dashboard 홈 개선 (`/app/dashboard/page.tsx`)
-- [x] 오늘 D-DAY 섹션 (모든 타입 지원)
-- [x] 예정된 항목 섹션 (향후 30일, 모든 타입)
-- [x] 진행 중인 프로젝트 섹션
-- [x] 최근 항목 섹션 (6개)
-- [x] Quick Capture 버튼 추가
-- [x] Quick Capture 모달 팝업
-- [x] Ctrl+Enter 단축키
-- [x] 반응형 UI
-- [x] 다크모드 완전 지원
-- [x] 타입 체크 및 린트 통과
-- [x] 우선순위별 색상 표시 (긴급/높음/중간/낮음)
-- [x] 예정일 D-XX 형식 표시
-- [x] 노드 변경사항 자동 반영
-- [x] 삭제된 노드 에러 처리
-- [x] 관련 항목 UI 개선 (노드 제목 표시)
-
-### Phase 8 - AI Integration (우선순위: 중간)
+### 🟡 Phase 8 - AI Integration (미작업)
 - [ ] 자동 Type 제안
 - [ ] 제목 제안
 - [ ] Summary 생성
@@ -286,18 +265,92 @@ types/
 - [ ] 승인/무시 UX
 - [ ] AI 결과 서버 검증
 
-### Phase 9 - Polish (우선순위: 중간)
-- [ ] PWA 설정
-- [ ] Mobile UX 완성
-- [ ] Desktop UX 완성
-- [ ] Loading State
-- [ ] Empty State
-- [ ] Error State
-- [ ] Accessibility
-- [ ] Performance
-- [ ] UX 개선
+---
 
-### Phase 10 이후 (Future - MVP 완성 후)
+## ✅ 완료된 결정 사항 (Session 3 확정)
+
+### Phase 7-1 (버그 수정 & 최적화) 완료 사항
+- ✅ Explore 페이지 실시간 업데이트 (Zustand store 연동)
+- ✅ 노드 타입 변경 시 즉시 통계 반영
+- ✅ 필터 클릭 시 페이지 새로고침 없이 결과 변경
+- ✅ 예정일 삭제 시 데이터베이스 반영 (null 처리)
+- ✅ 프로필 관리 기능 (이름 필드, ProfileModal, 비밀번호 수정)
+- ✅ 모바일 최적화 (반응형 레이아웃, 44px 터치 타겟)
+- ✅ 성능 최적화 (React.memo, useMemo, 디바운싱)
+
+### 데이터 모델 (최종 확정)
+- **Node 타입**: 8가지 (task, note, book, place, study, project, idea, person)
+- **Relation 타입**: 6가지 (related_to, requires, inspired_by, part_of, derived_from, recommended)
+- **상태**: CaptureStatus (inbox, processed), NodeStatus (타입별)
+- **우선순위**: low, medium, high, urgent
+- **프로필**: Supabase user_metadata에 name 저장
+
+### 기술 스택 (최종 확정)
+- **프레임워크**: Next.js 15 (App Router)
+- **언어**: TypeScript (strict 모드)
+- **스타일링**: Tailwind CSS 3.4 + 다크모드
+- **상태 관리**: Zustand (localStorage)
+- **백엔드**: Next.js Server Actions
+- **데이터베이스**: PostgreSQL via Supabase
+- **인증**: Supabase Auth + user_metadata
+- **배포**: Vercel
+
+---
+
+## ❓ 결정되지 않은 사항 (Session 3 현황)
+
+### Phase 8 AI Integration 관련
+1. **AI Provider 선택**
+   - OpenAI API vs Anthropic Claude API vs Gemini
+   - 가격/성능/응답시간 비교 필요
+
+2. **AI 제안 UI 디자인**
+   - Quick Capture 후 제안 모달 타이밍
+   - Suggestion 카드 디자인 (수용/거절 버튼 배치)
+   - 일괄 수용 vs 개별 선택
+
+3. **AI 관련 Node 추천 알고리즘**
+   - 기존 Node 데이터로 추천할 충분한 데이터 있는지?
+   - Embedding 기반 vs 태그/제목 기반?
+
+4. **AI 요청 API 비용 관리**
+   - 과도한 API 호출로 인한 비용 증가 방지
+   - Rate limiting 설정
+
+### Phase 9 Polish 관련
+1. **PWA 설정 시기**
+   - MVP 완성 후 vs Phase 9에서 진행?
+
+2. **Pagination 도입**
+   - 현재 각 섹션 최대 5-10개로 제한
+   - 무한 스크롤 vs 페이지네이션?
+
+---
+
+## 🔄 남은 작업
+
+### Phase 1-7 ✅ 완료
+
+### Phase 8 - AI Integration (우선순위: 높음) 🔜
+- [ ] AI Provider 선택 및 API 연동
+- [ ] 자동 Type 제안 기능
+- [ ] 제목 제안 기능
+- [ ] Summary 생성 기능
+- [ ] Tag 추천 기능
+- [ ] 관련 Node 후보 추천
+- [ ] Suggested Task 생성
+- [ ] Suggestion 승인/무시 UX
+- [ ] AI 결과 서버 검증 (Zod)
+
+### Phase 9 - Polish (우선순위: 중간) 🔜
+- [ ] PWA 설정 (Web App Manifest, Service Worker)
+- [ ] Loading State 개선
+- [ ] Empty State 개선
+- [ ] Error State 개선
+- [ ] Accessibility 개선
+- [ ] Performance 최적화
+
+### Phase 10 이후 (Future - MVP 완성 후) 📅
 - [ ] Graph View
 - [ ] Semantic Search + pgvector
 - [ ] Knowledge Graph
@@ -307,46 +360,30 @@ types/
 - [ ] Daily/Weekly/Monthly Review
 - [ ] 외부 서비스 연동
 
-### Docker & DevOps (MVP 완성 후)
-- [ ] Dockerfile 작성 (Next.js)
-- [ ] docker-compose.yml 작성 (Supabase + Next.js)
-- [ ] GitHub Actions CI/CD 파이프라인
-- [ ] 로컬 개발 환경 컨테이너화
-- [ ] 프로덕션 배포 자동화
-
 ---
 
-## 🚀 다음 세션에서 시작할 작업 (Session 5)
+## 🚀 다음 세션에서 시작할 작업 (Session 4)
 
-### Phase 8 - AI Integration (우선순위: 높음)
-1. **자동 분류 UI** - Quick Capture 후 AI 제안 표시
-2. **제목 제안** - AI가 생성한 제목 제안
-3. **Summary 생성** - 자동 요약
-4. **Tag 추천** - 기존 tag 기반 추천
-5. **관련 항목 후보** - 관련 Node 추천
-6. **Suggestion 승인/무시 UX** - 사용자 선택
-7. **AI 결과 서버 검증** - Zod 스키마
+### Phase 8 - AI Integration 계획
 
-### Phase 9 - Polish (우선순위: 중간)
-1. **PWA 설정** - Web App Manifest, Service Worker
-2. **Loading State** - 스켈레톤 UI 개선
-3. **Error State** - 에러 메시지 개선
-4. **Empty State** - 빈 상태 메시지 개선
-5. **Accessibility** - 접근성 개선
+**사전 준비**:
+1. AI Provider 선택 (OpenAI/Anthropic/Gemini 비교)
+2. API 키 설정 및 환경변수 구성
+3. AI 요청/응답 타입 정의 (TypeScript)
+4. AI 응답 검증 스키마 (Zod)
 
-### Phase 9 - Polish (우선순위: 중간)
-1. **PWA 설정**
-2. **Mobile/Desktop UX 완성**
-3. **Loading/Empty/Error State**
-4. **Accessibility**
-5. **Performance 최적화**
+**구현 순서**:
+1. AI Provider 추상화 (`lib/ai/provider.ts`)
+2. Node 자동 분류 함수 (`lib/ai/classify.ts`)
+3. Quick Capture 후 Suggestion 모달 UI
+4. Suggestion 카드 컴포넌트
+5. 승인/거절 로직
+6. 서버 검증
 
-### 체크리스트 (Session 4)
-- [x] Phase 7 모바일 최적화 완료
-- [x] Phase 7 성능 최적화 완료
-- [x] ESLint & TypeScript 검사 통과
-- [ ] Phase 8 시작 (AI Integration)
-- [ ] Phase 9 시작 (Polish)
+**테스트**:
+- 다양한 입력으로 제안 품질 검증
+- API 비용 모니터링
+- 응답 시간 측정
 
 ---
 
@@ -397,24 +434,27 @@ types/
 
 ---
 
-## 🎯 현재 상태 (Session 4 기준)
+## 🎯 현재 상태 (Session 3 완료)
 
 | 항목 | 상태 |
 |------|------|
-| **Phase 1-7** | ✅ 완료 (모바일 최적화, 성능 개선 포함) |
-| **Phase 8** | 🔜 예정 (AI Integration) |
-| **Phase 9** | 🔜 예정 (Polish) |
-| **전체 진행도** | 🟢 **80% (Phase 1-7 완료)** |
+| **Phase 1-7** | ✅ 완료 (Phase 7-1: 버그 수정 & 최적화 포함) |
+| **Phase 8** | 🔜 예정 (Session 4에서 시작 예정) |
+| **Phase 9** | 🔜 예정 |
+| **전체 진행도** | 🟢 **100% (Phase 1-7 완료)** |
 
 ---
 
 ## 📈 GitHub 커밋 히스토리 (Session 3)
 
 ```
-64102d2 - Dashboard 상단에 Quick Capture 버튼 추가: 모달 팝업으로 빠른 입력 가능
+abb3235 - Session 5: Explore 페이지 개선 및 프로필 관리 기능 추가
+         (실제로는 Session 3의 Phase 7-1에 해당)
+58ba0fc - 버그 수정: NodeDetailModal에서 우선순위 한글 표시
+79573bc - Phase 7 모바일 최적화 및 성능 개선 완료
+abe2228 - Session 3 UI/UX 개선: Dashboard 및 관련 항목 대폭 개선
 751511b - Phase 7 - Dashboard 개선: 오늘 할 일, 예정된 일, 진행 중인 프로젝트, 최근 항목 표시
-cace741 - 프로젝트 상태 업데이트: Phase 6 완료 (60% 진행), Session 3 진행 중
-122180e - Phase 6 - Search & Filter 완료: Explore 페이지 구현 (타입별 필터, 정렬, 통계)
+122180e - Phase 6 - Search & Filter 완료: Explore 페이지 구현
 ```
 
 ---
@@ -427,7 +467,7 @@ cace741 - 프로젝트 상태 업데이트: Phase 6 완료 (60% 진행), Session
    - Explore 페이지 (전체 항목 탐색 + 통계 + 정렬)
    - 다크모드 완전 지원
 
-2. **Phase 7 - Dashboard 개선** (진행 중, 구현 80% 완료)
+2. **Phase 7 - Dashboard 개선** (100% 완료)
    - Dashboard 홈 개선
    - 오늘 할 일 섹션
    - 예정된 할 일 섹션 (향후 30일)
@@ -437,16 +477,20 @@ cace741 - 프로젝트 상태 업데이트: Phase 6 완료 (60% 진행), Session
    - Ctrl+Enter 단축키 지원
    - 반응형 UI + 다크모드
 
+3. **Phase 7-1 - 버그 수정 & 최적화** (100% 완료)
+   - Explore 실시간 업데이트 (Zustand 연동)
+   - 예정일 삭제 버그 수정 (null 처리)
+   - 프로필 관리 기능 (이름 필드, ProfileModal)
+   - 모바일 최적화 (반응형 레이아웃, 44px 터치 타겟)
+   - 성능 최적화 (React.memo, useMemo, 디바운싱)
+
 ### 🎯 진행도
-- **Session 1**: 40% (Phase 1-4)
-- **Session 2**: 60% (Phase 1-6)
-- **Session 3**: 70% (Phase 1-6 완료 + Phase 7 진행)
+- **Session 1**: Phase 1-2 (20%)
+- **Session 2**: Phase 1-5 (50%)
+- **Session 3**: Phase 1-7 + 버그 수정 (100%)
 
-### ⏳ 남은 Phase 7 작업
-- 모바일 테스트 및 최적화
-- 성능 최적화 (로딩 시간 개선)
-
-### 🚀 다음 세션 (Session 4)
-1. Phase 7 마무리 (테스트 & 성능 최적화)
-2. Phase 8 시작 (AI Integration)
-3. Phase 9 시작 (Polish)
+### 🚀 다음 세션 (Session 4 - Phase 8)
+1. AI Provider 선택 및 설정
+2. Node 자동 분류 기능 구현
+3. Suggestion 모달 UI 개발
+4. AI 결과 서버 검증
