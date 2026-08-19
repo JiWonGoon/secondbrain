@@ -1,96 +1,62 @@
 # SecondBrain - 프로젝트 진행 상태
 
 **마지막 업데이트**: 2026-08-19  
-**현재 세션**: Session 1
+**현재 세션**: Session 2  
+**전체 진행도**: 40% (Phase 1-4 + UI/UX 개선 완료)
 
 ---
 
 ## 📊 현재 Phase
 
 ### 🟢 Phase 1: 프로젝트 초기 설정 - **✅ 완료**
+- 완료: 2026-08-19
+- 커밋: `7c6c95c`
 
-**완료 날짜**: 2026-08-19
+### 🟢 Phase 2: Authentication - **✅ 완료**
+- 완료: 2026-08-19
+- 커밋: `aaa5375`
+- 구현: 로그인/회원가입, Protected Routes, 세션 관리
 
-#### 완료된 작업 (11/11)
-- ✅ Next.js 15 + App Router + TypeScript 설정
-- ✅ Tailwind CSS + 다크모드 설정
-- ✅ shadcn/ui 기본 설정 + lucide-react
-- ✅ Zustand 상태 관리 라이브러리 설치
-- ✅ React Hook Form + Zod 폼 검증 라이브러리
-- ✅ Supabase SSR 클라이언트 설정 (client.ts + server.ts)
-- ✅ 환경변수 설정 (.env.local + .env.example)
-- ✅ 기본 레이아웃 구성 (한국어 lang="ko")
-- ✅ TypeScript 도메인 타입 정의 (Node, Relation, User)
-- ✅ 빌드 테스트 (npm run build 성공)
-- ✅ TypeScript + ESLint 검증 (오류 없음)
+### 🟢 Phase 3: Database & RLS - **✅ 완료**
+- 완료: 2026-08-19
+- 커밋: `c57dbd3`
+- 구현: nodes/relations 테이블, RLS, 9개 Index, CRUD 액션
 
-#### 생성된 파일 (20개)
-**설정 파일**:
-- package.json (39개 패키지)
-- tsconfig.json (strict 모드)
-- next.config.js
-- tailwind.config.ts
-- postcss.config.js
-- .eslintrc.json
-- .env.example
-- .env.local
-- .gitignore
+### 🟢 Phase 4: Inbox / Quick Capture - **✅ 완료**
+- 완료: 2026-08-19
+- 커밋: `e553c76`
+- 구현: Quick Capture, Node 카드, Inbox 페이지, 상태 관리
 
-**앱 파일**:
-- app/layout.tsx
-- app/page.tsx
-- app/globals.css
+### 🟢 UI/UX 개선 - **✅ 완료**
+- 완료: 2026-08-19
+- 커밋: `00aa027`, `0f5519c`
+- 구현: 날짜/시간 표시, 다크모드/라이트모드 토글
 
-**라이브러리**:
-- lib/supabase/client.ts
-- lib/supabase/server.ts
-
-**타입**:
-- types/index.ts
-
-**문서**:
-- PHASE1_REPORT.md
-
-#### 검증 결과
-- ✅ npm run build: 성공 (1.1초)
-- ✅ npm run typecheck: 오류 없음
-- ✅ npm run lint: 오류/경고 없음
-- ✅ 개발 서버 시작: 성공 (Ready in 1764ms)
-
----
-
-## 🟡 Phase 2: Database & Authentication - **⏳ 진행 예정**
-
-### 계획된 작업
-1. Supabase 프로젝트 생성 및 설정
-2. 데이터베이스 테이블 생성
-   - `nodes` 테이블
-   - `relations` 테이블
-3. Row Level Security (RLS) 정책 설정
-4. 로그인/회원가입 페이지 구현
-   - `app/auth/login/page.tsx`
-   - `app/auth/signup/page.tsx`
-5. 인증 미들웨어 설정 (`middleware.ts`)
-6. 세션 관리 구현
-
-### 현재 상태
-- ❌ 아직 시작하지 않음
-- 📌 다음 세션에서 시작 예정
+### 🟡 Phase 5: Node CRUD - **⏳ 진행 예정**
+- 상태: 준비 중
+- 다음: Node Detail 페이지부터 시작
 
 ---
 
 ## ✅ 완료된 결정 사항
 
+### 데이터 모델 (확정)
+- **Node 타입**: 8가지 (task, note, book, place, study, project, idea, person)
+- **Relation 타입**: 6가지 (related_to, requires, inspired_by, part_of, derived_from, recommended)
+- **상태**: CaptureStatus (inbox, processed), NodeStatus (타입별)
+- **우선순위**: low, medium, high, urgent
+
 ### 기술 스택 확정
 - **프레임워크**: Next.js 15 (App Router)
 - **언어**: TypeScript (strict 모드)
-- **스타일링**: Tailwind CSS 3.4 + 다크모드
+- **스타일링**: Tailwind CSS 3.4 + 다크모드 (light/dark/system)
 - **폼 처리**: React Hook Form + Zod
-- **상태 관리**: Zustand
+- **상태 관리**: Zustand (localStorage 저장)
 - **백엔드**: Next.js Server Actions
 - **데이터베이스**: PostgreSQL via Supabase
-- **인증**: Supabase Auth
-- **배포**: Vercel (초기), Docker (MVP 완성 후)
+- **인증**: Supabase Auth (email/password)
+- **아이콘**: lucide-react
+- **배포**: Vercel
 
 ### 프로젝트 구조 확정
 ```
@@ -116,143 +82,178 @@ types/
   └── index.ts            # 설정됨
 ```
 
-### 환경변수 관리 방식
-- `.env.local` (로컬 개발 환경)
-- `.env.example` (템플릿)
-- `.gitignore`에 `.env.local` 포함
+### 아키텍처 패턴 (확정)
+- **Server Actions**: lib/actions/에서 인증, Node CRUD, Relation CRUD 처리
+- **Zustand 스토어**: 글로벌 상태 (nodes, theme)
+- **클라이언트 컴포넌트**: React 훅 및 상태 관리
+- **ThemeProvider**: 클라이언트 프로바이더 패턴
 
-### 타입 정의 확정
-**Node 타입**:
-- 8가지 유형: task, note, book, place, study, project, idea, person
-- 상태: CaptureStatus (inbox, processed), NodeStatus 등
-- 우선순위: low, medium, high, urgent
+### 보안 (확정)
+- **RLS 정책**: user_id 기반 데이터 격리
+- **Protected Routes**: Middleware로 미인증 사용자 차단
+- **Service Role Key**: 서버에서만 사용
 
-**Relation 타입**:
-- 6가지 관계: related_to, requires, inspired_by, part_of, derived_from, recommended
-
-**User 타입**:
-- id, email, createdAt, updatedAt
+### 성능 (확정)
+- **Database Index**: 9개 (user_id, type, status, capture_status, created_at, updated_at, due_date, user_type, user_from_node, user_to_node)
+- **기본 검색**: PostgreSQL ILIKE
+- **Pagination**: 미래 구현 예정
 
 ---
 
 ## ❓ 결정되지 않은 사항
 
-### Phase 2 관련
+### Phase 5 관련 (Node Detail UI)
 
-#### 1. Supabase 프로젝트 생성 방식
-- **문제**: 아직 Supabase 프로젝트가 생성되지 않음
+#### 1. Node Detail 페이지 레이아웃
 - **옵션**:
-  - A) 사용자가 직접 Supabase에서 프로젝트 생성 후 API 키 제공
-  - B) Claude가 안내 문서 작성 후 사용자 진행
-  - C) 로컬 Supabase 개발 환경 사용 (supabase-cli)
-- **결정 필요**: 다음 세션에서 확인
+  - A) 풀 페이지 상세 보기
+  - B) 모달 팝업
+  - C) 사이드 패널
+- **결정 필요**: 구현 시 결정
 
-#### 2. 인증 전략
-- **문제**: 로그인/회원가입 UI와 로직 구현 방식
+#### 2. 관련 항목 표시 방식
 - **옵션**:
-  - A) Email/Password 기본 인증만 (MVP)
-  - B) Social OAuth 포함
-  - C) 이메일 확인 필수/선택
-- **현재 계획**: A (이메일/비밀번호만, MVP 범위)
-- **결정 필요**: 추가 검증 필요
+  - A) 카드 그리드
+  - B) 리스트 형식
+  - C) 그래프 시각화
+- **현재 계획**: A 또는 B (그래프는 나중에)
+- **결정 필요**: Phase 5 시작 시
 
-#### 3. 로그인 후 리다이렉트 경로
-- **문제**: 로그인 후 어디로 이동할 것인가?
+#### 3. Relation 추가/삭제 UI
 - **옵션**:
-  - A) `/dashboard` (메인 대시보드)
-  - B) `/dashboard/inbox` (Inbox)
-  - C) `/dashboard/nodes` (노드 목록)
-- **현재 계획**: B (/dashboard/inbox - Quick Capture 우선)
-- **결정 필요**: Phase 2 시작 시 확인
+  - A) 모달 창
+  - B) 인라인 입력
+  - C) 드래그 & 드롭
+- **현재 계획**: A (모달)
+- **결정 필요**: Phase 5에서 결정
 
-#### 4. 데이터베이스 마이그레이션 도구
-- **문제**: DB 테이블 생성 방식
-- **옵션**:
-  - A) Supabase SQL Editor에서 직접 작성
-  - B) supabase-cli로 migration 관리
-  - C) Prisma ORM 사용
-- **현재 계획**: A (MVP 범위 내)
-- **결정 필요**: 실제 구현 시 확인
+### Phase 6-9 관련
+
+#### 검색/필터 위치
+- 헤더 vs 사이드바
+
+#### Dashboard 콘텐츠
+- "오늘 할 일" 계산 방식
+- "최근 항목" 개수
 
 ---
 
 ## 🔄 남은 작업
 
-### Phase 2 (다음 단계)
-- [ ] Supabase 프로젝트 생성
-- [ ] Supabase 환경변수 설정
-- [ ] `nodes` 테이블 생성
-- [ ] `relations` 테이블 생성
-- [ ] RLS 정책 설정
-- [ ] 로그인 페이지 구현
-- [ ] 회원가입 페이지 구현
-- [ ] 인증 미들웨어 설정
-- [ ] 보호된 라우트 구성
+### Phase 5 - Node CRUD (우선순위: 높음)
+- [ ] Node Detail 페이지 (`/nodes/[id]/page.tsx`)
+- [ ] Node Edit 기능
+- [ ] Node Delete 기능 (확인 모달)
+- [ ] Relation 추가 UI
+- [ ] Relation 삭제 UI
 
-### Phase 3 (미래)
-- [ ] Inbox / Quick Capture 구현
-- [ ] Node CRUD 구현
-- [ ] Relations 관리 구현
-- [ ] Search & Filter 구현
-- [ ] Dashboard 구현
-- [ ] 모바일 UX 최적화
-- [ ] PWA 설정
-- [ ] AI Integration (나중에)
+### Phase 6 - Search & Filter (우선순위: 중간)
+- [ ] 검색 기능 (PostgreSQL ILIKE)
+- [ ] Type 필터
+- [ ] Status 필터
+- [ ] Tag 필터
+- [ ] Priority 필터
+- [ ] Due Date 필터
 
-### 기타
-- [ ] shadcn/ui 컴포넌트 추가 설치 (필요 시)
-- [ ] 개발 환경 모니터링 스크립트 추가 (선택사항)
-- [ ] CI/CD 파이프라인 설정 (나중에)
+### Phase 7 - Explore (우선순위: 중간)
+- [ ] 전체 항목 탐색 페이지
+- [ ] 타입별 필터
+- [ ] 통계/집계
+
+### Phase 8 - Dashboard (우선순위: 중간)
+- [ ] 오늘 할 일
+- [ ] 예정된 할 일
+- [ ] 최근 추가한 항목
+- [ ] 최근 수정한 항목
+- [ ] 진행 중인 프로젝트
+
+### Phase 9 - AI Integration (우선순위: 낮음)
+- [ ] 자동 분류
+- [ ] 제목 제안
+- [ ] Summary 생성
+- [ ] Tag 추천
+- [ ] 관련 항목 후보
+
+### Phase 10 이후 (Future)
+- [ ] Graph View
+- [ ] Semantic Search + pgvector
+- [ ] 복잡한 AI 자동화
+- [ ] 외부 서비스 연동
+- [ ] 모바일 네이티브 앱
 
 ---
 
 ## 🚀 다음 세션에서 시작할 작업
 
-### 우선순위 1 (필수)
-1. **Supabase 프로젝트 설정**
-   - Supabase 계정 생성/로그인
-   - 새 프로젝트 생성
-   - API URL, Anon Key, Service Role Key 획득
-   - `.env.local` 환경변수 설정
+### Phase 5 - Node CRUD (즉시 시작 가능)
 
-2. **데이터베이스 테이블 생성**
-   - `nodes` 테이블 SQL 작성
-   - `relations` 테이블 SQL 작성
-   - 필수 Index 생성
+#### 1. Node Detail 페이지
+```
+파일: /app/nodes/[id]/page.tsx
+구현:
+- getNode 액션으로 데이터 로드
+- NodeCard와 유사한 스타일
+- 상세 정보 표시
+- 관련 항목 표시 (getRelations)
+- 수정/삭제 버튼
+```
 
-3. **RLS 정책 설정**
-   - `nodes` 테이블 RLS
-   - `relations` 테이블 RLS
+#### 2. Node Edit 기능
+```
+파일: /app/nodes/[id]/edit/page.tsx (또는 모달)
+구현:
+- updateNode 액션 연결
+- 제목, 내용, 태그, 상태 수정
+- 성공/에러 메시지
+```
 
-### 우선순위 2 (High)
-4. **로그인/회원가입 페이지**
-   - `app/auth/login/page.tsx`
-   - `app/auth/signup/page.tsx`
-   - Supabase Auth 연동
+#### 3. Node Delete 기능
+```
+구현:
+- 삭제 확인 모달
+- deleteNode 액션 연결
+- 삭제 후 Inbox로 리다이렉트
+```
 
-5. **인증 미들웨어**
-   - `middleware.ts`
-   - Protected Routes 설정
+#### 4. Relation UI
+```
+구현:
+- 관련 항목 추가 모달
+- createRelation 액션 연결
+- Relation 삭제 버튼
+- deleteRelation 액션 연결
+```
 
 ### 체크리스트
-- [ ] Supabase 프로젝트 생성
-- [ ] `.env.local` 업데이트
-- [ ] DB 테이블 생성 및 검증
-- [ ] RLS 정책 설정 및 테스트
-- [ ] 로그인 페이지 구현
-- [ ] 회원가입 페이지 구현
-- [ ] 인증 미들웨어 구현
-- [ ] 개발 서버에서 전체 인증 흐름 테스트
+- [ ] Node Detail 페이지 구현
+- [ ] Node Edit 기능 구현
+- [ ] Node Delete 기능 구현
+- [ ] Relation UI 구현
+- [ ] 전체 CRUD 흐름 테스트
+- [ ] 다크모드에서 UI 확인
+- [ ] 모바일 UX 확인
 
 ---
 
 ## 📝 주요 노트
 
 ### 개발 환경
-- **개발 서버**: `npm run dev` (Port 3000)
+- **개발 서버**: `npm run dev` (Port 3004-3006, 3000 점유 시 대체 포트 사용)
 - **빌드**: `npm run build` (성공 확인됨)
 - **타입 검사**: `npm run typecheck` (오류 없음)
 - **린팅**: `npm run lint` (오류 없음)
+
+### 테마 토글 (최신 구현)
+- **저장소**: Zustand + localStorage
+- **테마**: light, dark, system 3가지
+- **구현**: ThemeProvider로 클라이언트 감싸기
+- **스타일**: Tailwind dark: 클래스 및 data-theme 속성
+
+### 알려진 이슈
+- **포트 점유**: 포트 3000 자주 점유, 3004-3006 사용 중
+- **해결**: Windows 작업 관리자에서 node 프로세스 종료 후 `npm run dev` 재시작
+- **Node 타입**: 현재 모든 항목이 "note" 타입으로 생성 (Quick Capture 때문, Phase 5에서 개선)
+- **Supabase RLS**: 모든 쿼리가 user_id로 필터링됨 (보안 ✅)
 
 ### CLAUDE.md 준수 사항
 - ✅ MVP 범위 내 기능만 구현
@@ -260,19 +261,7 @@ types/
 - ✅ 기존 코드 최대 재사용
 - ✅ 모바일 UX 함께 고려
 - ✅ 각 단계 완료 후 다음 진행
-
-### 보안 고려사항
-- ✅ .env.local 에 민감한 정보 저장
-- ✅ .gitignore 에 환경변수 파일 포함
-- ✅ Supabase RLS 정책 설정 필수
-- ⚠️ Service Role Key는 서버에서만 사용
-- ⚠️ Client Key는 공개해도 안전
-
-### 기술 부채 (향후 정리)
-- ⚠️ npm audit: 3개 고위험 취약점 (개발 단계이므로 무시 가능)
-  - 필요 시: `npm audit fix --force`
-- ⚠️ Deprecated 경고: @supabase/auth-helpers-nextjs (이미 @supabase/ssr로 교체)
-- ⚠️ Deprecated 경고: next lint (ESLint CLI로 마이그레이션 필요, 나중에)
+- ✅ 타입 체크, 린트 통과
 
 ---
 
@@ -281,11 +270,15 @@ types/
 | 파일 | 경로 | 용도 |
 |------|------|------|
 | 환경변수 | `.env.local` | Supabase 설정 |
-| 타입 정의 | `types/index.ts` | 도메인 타입 |
-| Supabase | `lib/supabase/` | DB 연동 |
-| 앱 진입점 | `app/layout.tsx` | 기본 레이아웃 |
-| 프로젝트 계획 | `/plans/starry-seeking-ullman.md` | Phase별 구현 계획 |
-| Phase 1 리포트 | `PHASE1_REPORT.md` | Phase 1 완료 보고 |
+| 타입 정의 | `types/node.ts`, `types/auth.ts` | Node/Relation/Auth 타입 |
+| 인증 액션 | `lib/actions/auth.ts` | signUp, signIn, signOut |
+| Node CRUD | `lib/actions/node.ts` | createNode, listNodes, updateNode, deleteNode |
+| Relation CRUD | `lib/actions/relation.ts` | createRelation, getRelations, deleteRelation |
+| 상태 관리 | `lib/stores/nodeStore.ts`, `lib/stores/themeStore.ts` | 글로벌 상태 |
+| Supabase | `lib/supabase/` | 클라이언트, 서버, 미들웨어 |
+| 컴포넌트 | `components/` | QuickCapture, NodeCard, ThemeToggle, ThemeProvider |
+| 페이지 | `app/` | 인증, 대시보드, Inbox 페이지 |
+| DB Migration | `supabase/migrations/20260819_create_nodes_and_relations.sql` | DB 스키마 |
 
 ---
 
@@ -294,13 +287,26 @@ types/
 | 항목 | 상태 |
 |------|------|
 | **Phase 1** | ✅ 완료 |
-| **Phase 2** | ⏳ 예정 |
-| **프로젝트 초기화** | ✅ 완료 |
-| **개발 환경** | ✅ 준비 완료 |
-| **Supabase 설정** | ⏳ 필요 |
-| **인증 시스템** | ⏳ 예정 |
-| **전체 진행도** | 🟢 **18% (Phase 1/9 완료)** |
+| **Phase 2** | ✅ 완료 |
+| **Phase 3** | ✅ 완료 |
+| **Phase 4** | ✅ 완료 |
+| **UI/UX 개선** | ✅ 완료 |
+| **Phase 5** | ⏳ 준비 중 |
+| **전체 진행도** | 🟢 **40% (Phase 1-4 + UI/UX 완료)** |
 
 ---
 
-**다음 세션에서 Phase 2를 시작할 준비가 완료되었습니다!** 🚀
+## 📈 GitHub 커밋 히스토리
+
+```
+0f5519c - 테마 토글 기능 수정
+00aa027 - UI/UX 개선사항 적용 (날짜/시간, 다크모드)
+e553c76 - Phase 4 - Inbox / Quick Capture 완료
+c57dbd3 - Phase 3 - Database & RLS 완료
+aaa5375 - Phase 2 - Authentication 완료
+7c6c95c - Phase 1 - 프로젝트 초기 설정 완료
+```
+
+---
+
+**다음 세션에서 Phase 5 - Node CRUD를 시작할 준비가 완료되었습니다!** 🚀
