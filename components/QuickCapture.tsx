@@ -48,8 +48,8 @@ export function QuickCapture() {
 
   return (
     <div className="w-full max-w-2xl mx-auto">
-      <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-lg font-semibold text-slate-900 mb-4">
+      <form onSubmit={handleSubmit} className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6">
+        <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
           빠른 입력
         </h2>
 
@@ -58,13 +58,13 @@ export function QuickCapture() {
           onChange={(e) => setContent(e.target.value)}
           disabled={isLoading}
           placeholder="생각나는 것을 입력하세요..."
-          className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none disabled:bg-slate-50 disabled:cursor-not-allowed transition"
+          className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none disabled:bg-slate-50 dark:disabled:bg-slate-700 disabled:cursor-not-allowed transition placeholder-slate-400 dark:placeholder-slate-500"
           rows={4}
         />
 
         {error && (
-          <div className="mt-3 p-3 bg-red-50 border border-red-200 rounded-lg">
-            <p className="text-red-700 text-sm">{error}</p>
+          <div className="mt-3 p-3 bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-800 rounded-lg">
+            <p className="text-red-700 dark:text-red-200 text-sm">{error}</p>
           </div>
         )}
 
@@ -72,7 +72,7 @@ export function QuickCapture() {
           <button
             type="submit"
             disabled={isLoading}
-            className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition disabled:bg-slate-400 disabled:cursor-not-allowed"
+            className="flex-1 bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition disabled:bg-slate-400 disabled:cursor-not-allowed"
           >
             {isLoading ? '저장 중...' : '저장'}
           </button>
@@ -83,7 +83,7 @@ export function QuickCapture() {
               setError(null)
             }}
             disabled={isLoading}
-            className="flex-1 bg-slate-200 hover:bg-slate-300 text-slate-900 font-medium py-2 px-4 rounded-lg transition disabled:bg-slate-100 disabled:cursor-not-allowed"
+            className="flex-1 bg-slate-200 hover:bg-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-900 dark:text-white font-medium py-2 px-4 rounded-lg transition disabled:bg-slate-100 dark:disabled:bg-slate-700 disabled:cursor-not-allowed"
           >
             초기화
           </button>

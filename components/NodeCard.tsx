@@ -36,36 +36,36 @@ export function NodeCard({ node }: NodeCardProps) {
 
   return (
     <Link href={`/nodes/${node.id}`}>
-      <div className="bg-white rounded-lg border border-slate-200 hover:border-slate-300 hover:shadow-md transition p-4 cursor-pointer">
+      <div className="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 hover:shadow-md transition p-4 cursor-pointer">
         <div className="flex items-start justify-between gap-3 mb-3">
-          <h3 className="text-lg font-semibold text-slate-900 line-clamp-2 flex-1">
+          <h3 className="text-lg font-semibold text-slate-900 dark:text-white line-clamp-2 flex-1">
             {node.title}
           </h3>
-          <span className={`${colors.bg} ${colors.text} text-xs font-semibold px-2 py-1 rounded whitespace-nowrap`}>
+          <span className={`${colors.bg} dark:bg-slate-700 ${colors.text} dark:text-slate-300 text-xs font-semibold px-2 py-1 rounded whitespace-nowrap`}>
             {label}
           </span>
         </div>
 
         {node.content && (
-          <p className="text-slate-600 text-sm line-clamp-2 mb-3">
+          <p className="text-slate-600 dark:text-slate-400 text-sm line-clamp-2 mb-3">
             {node.content}
           </p>
         )}
 
-        <div className="flex items-center justify-between text-xs text-slate-500">
+        <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
           <div className="flex gap-2">
             {node.tags.length > 0 && (
               <div className="flex gap-1">
                 {node.tags.slice(0, 2).map((tag) => (
                   <span
                     key={tag}
-                    className="bg-slate-100 px-2 py-1 rounded text-slate-600"
+                    className="bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300"
                   >
                     #{tag}
                   </span>
                 ))}
                 {node.tags.length > 2 && (
-                  <span className="text-slate-500">
+                  <span className="text-slate-500 dark:text-slate-400">
                     +{node.tags.length - 2}
                   </span>
                 )}
@@ -76,6 +76,11 @@ export function NodeCard({ node }: NodeCardProps) {
             {new Date(node.created_at).toLocaleDateString('ko-KR', {
               month: 'short',
               day: 'numeric',
+            })}{' '}
+            {new Date(node.created_at).toLocaleTimeString('ko-KR', {
+              hour: '2-digit',
+              minute: '2-digit',
+              hour12: false,
             })}
           </time>
         </div>
