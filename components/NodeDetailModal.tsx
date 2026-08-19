@@ -152,15 +152,15 @@ export function NodeDetailModal({ nodeId, isOpen, onClose }: NodeDetailModalProp
 
     try {
       setError(null)
-      const updates = {
+      const updates: any = {
         type: formData.type,
         title: formData.title,
         content: formData.content,
         summary: formData.summary,
         tags: formData.tags,
-        status: formData.status || undefined,
-        priority: formData.priority ? (formData.priority as any) : undefined,
-        due_date: formData.dueDate ? new Date(formData.dueDate).toISOString() : undefined,
+        status: formData.status || null,
+        priority: formData.priority ? (formData.priority as any) : null,
+        due_date: formData.dueDate ? new Date(formData.dueDate).toISOString() : null,
       }
 
       const updatedNode = await updateNode(nodeId, updates)

@@ -3,12 +3,17 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 
-export async function signUp(email: string, password: string) {
+export async function signUp(email: string, password: string, name: string) {
   const supabase = await createClient()
 
   const { error } = await supabase.auth.signUp({
     email,
     password,
+    options: {
+      data: {
+        name,
+      },
+    },
   })
 
   if (error) {
@@ -58,4 +63,30 @@ export async function getUser() {
   } = await supabase.auth.getUser()
 
   return user
+}
+
+export async function updateProfile(name?: string, password?: string) {
+  const supabase = await createClient()
+
+  const updates: any = {}
+
+  if (name) {
+    updates.data = { name }
+  }
+
+  if (password) {
+    updates.password = password
+  }
+
+  if (Object.keys(updates).length === 0) {
+    throw new Error('업데이트할 정보가 없습니다.')
+  }
+
+  const { error } = await supabase.auth.updateUser(updates)
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  return { success: true }
 }

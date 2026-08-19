@@ -3,10 +3,11 @@
 import { signOut } from '@/lib/actions/auth'
 import { createClient } from '@/lib/supabase/client'
 import { ThemeToggle } from '@/components/ThemeToggle'
+import { ProfileModal } from '@/components/ProfileModal'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { Search as SearchIcon } from 'lucide-react'
+import { Search as SearchIcon, User } from 'lucide-react'
 
 export default function DashboardLayout({
   children,
@@ -16,6 +17,7 @@ export default function DashboardLayout({
   const router = useRouter()
   const [user, setUser] = useState<any>(null)
   const [isLoading, setIsLoading] = useState(true)
+  const [isProfileOpen, setIsProfileOpen] = useState(false)
 
   useEffect(() => {
     const supabase = createClient()
@@ -35,6 +37,13 @@ export default function DashboardLayout({
     await signOut()
   }
 
+  const handleProfileUpdate = () => {
+    const supabase = createClient()
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setUser(user)
+    })
+  }
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 flex items-center justify-center">
@@ -42,6 +51,9 @@ export default function DashboardLayout({
       </div>
     )
   }
+
+  const userName = user?.user_metadata?.name || '사용자'
+  const userEmail = user?.email || ''
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
@@ -62,9 +74,28 @@ export default function DashboardLayout({
             >
               <SearchIcon size={20} />
             </Link>
-            <span className="text-xs text-slate-600 dark:text-slate-400 hidden lg:inline max-w-[150px] truncate">
-              {user?.email}
-            </span>
+
+            {/* 프로필 버튼 - 클릭하면 모달 오픈 */}
+            <button
+              onClick={() => setIsProfileOpen(true)}
+              className="hidden md:flex items-center gap-2 px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition"
+              title="프로필 설정"
+            >
+              <User size={18} />
+              <span className="truncate max-w-[150px]">
+                {userName}
+              </span>
+            </button>
+
+            {/* 모바일: 프로필 아이콘만 */}
+            <button
+              onClick={() => setIsProfileOpen(true)}
+              className="md:hidden p-2 h-10 w-10 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition"
+              title="프로필 설정"
+            >
+              <User size={20} />
+            </button>
+
             <ThemeToggle />
             <button
               onClick={handleSignOut}
@@ -76,6 +107,15 @@ export default function DashboardLayout({
           </div>
         </div>
       </header>
+
+      {/* 프로필 모달 */}
+      <ProfileModal
+        isOpen={isProfileOpen}
+        onClose={() => setIsProfileOpen(false)}
+        userName={userName}
+        userEmail={userEmail}
+        onSuccess={handleProfileUpdate}
+      />
 
       {/* 메인 콘텐츠 */}
       <main className="max-w-7xl mx-auto px-3 sm:px-4 py-6 sm:py-8">

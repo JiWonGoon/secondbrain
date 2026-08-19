@@ -401,3 +401,414 @@ ailed for pack: Error: ENOENT: no such file or directory, rename 'D:\workspaces\
    - Environments: .env.local
 
  ✓ Starting...
+ ✓ Ready in 1615ms
+
+> secondbrain@0.1.0 dev
+> next dev
+
+   ▲ Next.js 15.5.23
+   - Local:        http://localhost:3000
+   - Network:      http://172.40.0.138:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 1506ms
+ ○ Compiling /middleware ...
+ ✓ Compiled /middleware in 676ms (171 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (107kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (258kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+ ○ Compiling /auth/login ...
+ ✓ Compiled /auth/login in 3.2s (757 modules)
+ GET /auth/login 200 in 3496ms
+ ✓ Compiled / in 329ms (750 modules)
+ GET / 200 in 513ms
+ ○ Compiling /dashboard ...
+ ✓ Compiled /dashboard in 936ms (923 modules)
+ GET /dashboard 200 in 1220ms
+ POST /dashboard 200 in 352ms
+ POST /dashboard 200 in 70ms
+ POST /dashboard 200 in 55ms
+ POST /dashboard 200 in 55ms
+ POST /dashboard 200 in 62ms
+ POST /dashboard 200 in 49ms
+ POST /dashboard 200 in 40ms
+ POST /dashboard 200 in 57ms
+ POST /dashboard 200 in 177ms
+ POST /dashboard 200 in 88ms
+ POST /dashboard 200 in 80ms
+ POST /dashboard 200 in 91ms
+ POST /dashboard 200 in 87ms
+ POST /dashboard 200 in 208ms
+ POST /dashboard 200 in 74ms
+ POST /dashboard 200 in 77ms
+ POST /dashboard 200 in 73ms
+ POST /dashboard 200 in 57ms
+ POST /dashboard 200 in 235ms
+ POST /dashboard 200 in 77ms
+ POST /dashboard 200 in 79ms
+ POST /dashboard 200 in 58ms
+ POST /dashboard 200 in 89ms
+ POST /dashboard 200 in 65ms
+ POST /dashboard 200 in 70ms
+ POST /dashboard 200 in 114ms
+ POST /dashboard 200 in 99ms
+ POST /dashboard 200 in 87ms
+ POST /dashboard 200 in 93ms
+ POST /dashboard 200 in 80ms
+ POST /dashboard 200 in 79ms
+ POST /dashboard 200 in 74ms
+ POST /dashboard 200 in 89ms
+ ✓ Compiled in 392ms (926 modules)
+ GET /dashboard 200 in 86ms
+ ✓ Compiled in 227ms (926 modules)
+ GET /dashboard 200 in 56ms
+ POST /dashboard 200 in 308ms
+ POST /dashboard 200 in 49ms
+ POST /dashboard 200 in 54ms
+ POST /dashboard 200 in 53ms
+ POST /dashboard 200 in 49ms
+ POST /dashboard 200 in 118ms
+ POST /dashboard 200 in 85ms
+ POST /dashboard 200 in 88ms
+ POST /dashboard 200 in 81ms
+ POST /dashboard 200 in 100ms
+ POST /dashboard 200 in 85ms
+ POST /dashboard 200 in 59ms
+ POST /dashboard 200 in 74ms
+ POST /dashboard 200 in 59ms
+ POST /dashboard 200 in 85ms
+ POST /dashboard 200 in 56ms
+ GET /dashboard 200 in 81ms
+ ✓ Compiled /auth/login in 423ms (592 modules)
+ GET /auth/login 200 in 574ms
+ POST /dashboard 303 in 698ms
+ GET /auth/login 200 in 38ms
+ GET /dashboard 200 in 238ms
+ POST /auth/login 303 in 738ms
+ POST /dashboard 200 in 118ms
+ POST /dashboard 200 in 78ms
+ POST /dashboard 200 in 71ms
+ POST /dashboard 200 in 70ms
+ POST /dashboard 200 in 57ms
+ POST /dashboard 200 in 86ms
+ POST /dashboard 200 in 92ms
+ POST /dashboard 200 in 67ms
+ GET /dashboard 200 in 50ms
+ ○ Compiling /dashboard/explore ...
+ ✓ Compiled /dashboard/explore in 756ms (928 modules)
+ GET /dashboard/explore?filter=today 200 in 875ms
+ POST /dashboard/explore?filter=today 200 in 150ms
+ POST /dashboard/explore?filter=today 200 in 57ms
+ POST /dashboard 200 in 71ms
+ POST /dashboard 200 in 65ms
+ POST /dashboard 200 in 70ms
+ POST /dashboard 200 in 78ms
+ POST /dashboard 200 in 59ms
+ POST /dashboard 200 in 72ms
+ POST /dashboard 200 in 64ms
+ POST /dashboard 200 in 72ms
+ GET /dashboard/explore?filter=upcoming 200 in 62ms
+ POST /dashboard/explore?filter=upcoming 200 in 93ms
+ POST /dashboard/explore?filter=upcoming 200 in 77ms
+ GET /dashboard 200 in 71ms
+ POST /dashboard 200 in 83ms
+ POST /dashboard 200 in 71ms
+ POST /dashboard 200 in 87ms
+ POST /dashboard 200 in 67ms
+ POST /dashboard 200 in 62ms
+ POST /dashboard 200 in 74ms
+ POST /dashboard 200 in 82ms
+ POST /dashboard 200 in 90ms
+ GET /dashboard/explore 200 in 60ms
+ POST /dashboard/explore 200 in 62ms
+ POST /dashboard/explore 200 in 56ms
+ GET /dashboard 200 in 52ms
+ POST /dashboard 200 in 60ms
+ POST /dashboard 200 in 81ms
+ POST /dashboard 200 in 61ms
+ POST /dashboard 200 in 72ms
+ POST /dashboard 200 in 61ms
+ POST /dashboard 200 in 64ms
+ POST /dashboard 200 in 72ms
+ POST /dashboard 200 in 56ms
+ GET /dashboard/explore?filter=today 200 in 68ms
+ POST /dashboard/explore?filter=today 200 in 84ms
+ POST /dashboard/explore?filter=today 200 in 61ms
+ GET /dashboard 200 in 57ms
+ POST /dashboard 200 in 63ms
+ POST /dashboard 200 in 64ms
+ POST /dashboard 200 in 67ms
+ POST /dashboard 200 in 64ms
+ POST /dashboard 200 in 74ms
+ POST /dashboard 200 in 64ms
+ POST /dashboard 200 in 81ms
+ POST /dashboard 200 in 76ms
+ GET /dashboard/explore 200 in 32ms
+ POST /dashboard/explore 200 in 77ms
+ POST /dashboard/explore 200 in 74ms
+ ✓ Compiled in 444ms (942 modules)
+ GET /dashboard/explore 200 in 92ms
+ ✓ Compiled in 252ms (942 modules)
+ GET /dashboard/explore 200 in 50ms
+ ✓ Compiled in 366ms (942 modules)
+ GET /dashboard/explore 200 in 56ms
+ ✓ Compiled in 244ms (942 modules)
+ GET /dashboard/explore 200 in 56ms
+ GET /dashboard 200 in 37ms
+ POST /dashboard 200 in 228ms
+ POST /dashboard 200 in 41ms
+ POST /dashboard 200 in 50ms
+ POST /dashboard 200 in 38ms
+ POST /dashboard 200 in 57ms
+ POST /dashboard 200 in 45ms
+ POST /dashboard 200 in 43ms
+ POST /dashboard 200 in 46ms
+ GET /dashboard/explore?filter=today 200 in 24ms
+ POST /dashboard/explore?filter=today 200 in 55ms
+ POST /dashboard/explore?filter=today 200 in 53ms
+ GET /dashboard 200 in 56ms
+ POST /dashboard 200 in 116ms
+ POST /dashboard 200 in 79ms
+ POST /dashboard 200 in 98ms
+ POST /dashboard 200 in 71ms
+ POST /dashboard 200 in 63ms
+ POST /dashboard 200 in 56ms
+ POST /dashboard 200 in 61ms
+ POST /dashboard 200 in 70ms
+ GET /dashboard/explore?filter=upcoming 200 in 53ms
+ POST /dashboard/explore?filter=upcoming 200 in 73ms
+ POST /dashboard/explore?filter=upcoming 200 in 59ms
+ GET /dashboard 200 in 42ms
+ POST /dashboard 200 in 68ms
+ POST /dashboard 200 in 51ms
+ POST /dashboard 200 in 58ms
+ POST /dashboard 200 in 69ms
+ POST /dashboard 200 in 50ms
+ POST /dashboard 200 in 69ms
+ POST /dashboard 200 in 54ms
+ POST /dashboard 200 in 52ms
+ GET /dashboard/explore?filter=today 200 in 27ms
+ POST /dashboard/explore?filter=today 200 in 60ms
+ POST /dashboard/explore?filter=today 200 in 345ms
+ GET /dashboard 200 in 24ms
+ POST /dashboard 200 in 39ms
+ POST /dashboard 200 in 40ms
+ POST /dashboard 200 in 44ms
+ POST /dashboard 200 in 47ms
+ POST /dashboard 200 in 56ms
+ POST /dashboard 200 in 57ms
+ POST /dashboard 200 in 41ms
+ POST /dashboard 200 in 48ms
+ ○ Compiling /dashboard/search ...
+ ✓ Compiled /dashboard/search in 526ms (937 modules)
+ GET /dashboard/search 200 in 590ms
+ GET /dashboard 200 in 30ms
+ POST /dashboard 200 in 91ms
+ POST /dashboard 200 in 43ms
+ POST /dashboard 200 in 46ms
+ POST /dashboard 200 in 47ms
+ POST /dashboard 200 in 58ms
+ POST /dashboard 200 in 51ms
+ POST /dashboard 200 in 59ms
+ POST /dashboard 200 in 42ms
+ ✓ Compiled /dashboard/inbox in 424ms (946 modules)
+ GET /dashboard/inbox 200 in 496ms
+ POST /dashboard/inbox 200 in 68ms
+ POST /dashboard/inbox 200 in 57ms
+ GET /dashboard 200 in 38ms
+ POST /dashboard 200 in 41ms
+ POST /dashboard 200 in 56ms
+ POST /dashboard 200 in 52ms
+ POST /dashboard 200 in 53ms
+ POST /dashboard 200 in 39ms
+ POST /dashboard 200 in 46ms
+ POST /dashboard 200 in 46ms
+ POST /dashboard 200 in 41ms
+ POST /dashboard 200 in 53ms
+ GET /dashboard 200 in 45ms
+ GET /dashboard/explore 200 in 32ms
+ POST /dashboard/explore 200 in 198ms
+ POST /dashboard/explore 200 in 41ms
+ POST /dashboard/explore 200 in 87ms
+ POST /dashboard/explore 200 in 62ms
+ POST /dashboard/explore 200 in 87ms
+ GET /dashboard 200 in 26ms
+ POST /dashboard 200 in 40ms
+ POST /dashboard 200 in 58ms
+ POST /dashboard 200 in 41ms
+ POST /dashboard 200 in 52ms
+ POST /dashboard 200 in 41ms
+ POST /dashboard 200 in 42ms
+ POST /dashboard 200 in 61ms
+ POST /dashboard 200 in 49ms
+ POST /dashboard 200 in 78ms
+ GET /dashboard/explore 200 in 21ms
+ POST /dashboard/explore 200 in 39ms
+ POST /dashboard/explore 200 in 38ms
+ POST /dashboard/explore 200 in 60ms
+ POST /dashboard/explore 200 in 42ms
+ POST /dashboard/explore 200 in 54ms
+ POST /dashboard/explore 200 in 52ms
+ POST /dashboard/explore 200 in 56ms
+ ✓ Compiled in 418ms (954 modules)
+ GET /dashboard/explore 200 in 86ms
+ ✓ Compiled in 297ms (954 modules)
+ GET /dashboard/explore 200 in 76ms
+ ✓ Compiled in 263ms (954 modules)
+ GET /dashboard/explore 200 in 51ms
+ ✓ Compiled in 419ms (954 modules)
+ GET /dashboard/explore 200 in 54ms
+ POST /dashboard/explore 200 in 270ms
+ ✓ Compiled in 245ms (954 modules)
+ GET /dashboard/explore 200 in 55ms
+ ✓ Compiled in 385ms (954 modules)
+ GET /dashboard/explore 200 in 55ms
+ GET /dashboard 200 in 37ms
+ POST /dashboard 200 in 108ms
+ POST /dashboard 200 in 49ms
+ POST /dashboard 200 in 56ms
+ POST /dashboard 200 in 47ms
+ POST /dashboard 200 in 54ms
+ POST /dashboard 200 in 53ms
+ POST /dashboard 200 in 46ms
+ POST /dashboard 200 in 43ms
+ POST /dashboard 200 in 44ms
+ POST /dashboard 200 in 42ms
+ POST /dashboard 200 in 125ms
+ POST /dashboard 200 in 94ms
+ POST /dashboard 200 in 63ms
+ POST /dashboard 200 in 69ms
+ POST /dashboard 200 in 71ms
+ POST /dashboard 200 in 71ms
+ POST /dashboard 200 in 69ms
+ GET /dashboard/explore 200 in 63ms
+ POST /dashboard/explore 200 in 82ms
+ POST /dashboard/explore 200 in 69ms
+ POST /dashboard/explore 200 in 105ms
+ POST /dashboard/explore 200 in 64ms
+ POST /dashboard/explore 200 in 82ms
+ GET /dashboard 200 in 52ms
+ POST /dashboard 200 in 73ms
+ POST /dashboard 200 in 58ms
+ POST /dashboard 200 in 70ms
+ POST /dashboard 200 in 62ms
+ POST /dashboard 200 in 67ms
+ POST /dashboard 200 in 75ms
+ POST /dashboard 200 in 63ms
+ POST /dashboard 200 in 65ms
+ POST /dashboard 200 in 65ms
+ GET /dashboard/explore?filter=today 200 in 45ms
+ POST /dashboard/explore?filter=today 200 in 66ms
+ POST /dashboard/explore?filter=today 200 in 87ms
+ GET /dashboard 200 in 59ms
+ POST /dashboard 200 in 62ms
+ POST /dashboard 200 in 80ms
+ POST /dashboard 200 in 76ms
+ POST /dashboard 200 in 84ms
+ POST /dashboard 200 in 55ms
+ POST /dashboard 200 in 83ms
+ POST /dashboard 200 in 74ms
+ POST /dashboard 200 in 90ms
+ POST /dashboard 200 in 96ms
+ GET /dashboard/explore?filter=today 200 in 48ms
+ POST /dashboard/explore?filter=today 200 in 62ms
+ POST /dashboard/explore?filter=today 200 in 79ms
+ ✓ Compiled in 434ms (954 modules)
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /dashboard/explore?filter=today 200 in 108ms
+ GET /dashboard/explore?filter=today 200 in 167ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ✓ Compiled in 336ms (954 modules)
+ GET /dashboard/explore?filter=today 200 in 174ms
+ POST /dashboard/explore?filter=today 200 in 105ms
+ POST /dashboard/explore?filter=today 200 in 54ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ✓ Compiled in 581ms (954 modules)
+ GET /dashboard/explore?filter=today 200 in 386ms
+ POST /dashboard/explore?filter=today 200 in 77ms
+ POST /dashboard/explore?filter=today 200 in 56ms
+ GET /dashboard 200 in 34ms
+ POST /dashboard 200 in 84ms
+ POST /dashboard 200 in 62ms
+ POST /dashboard 200 in 61ms
+ POST /dashboard 200 in 48ms
+ POST /dashboard 200 in 43ms
+ POST /dashboard 200 in 46ms
+ POST /dashboard 200 in 39ms
+ POST /dashboard 200 in 41ms
+ GET /dashboard/explore?filter=today 200 in 22ms
+ POST /dashboard/explore?filter=today 200 in 49ms
+ POST /dashboard/explore?filter=today 200 in 65ms
+ GET /dashboard 200 in 61ms
+ POST /dashboard 200 in 78ms
+ POST /dashboard 200 in 71ms
+ POST /dashboard 200 in 80ms
+ POST /dashboard 200 in 91ms
+ POST /dashboard 200 in 89ms
+ POST /dashboard 200 in 76ms
+ POST /dashboard 200 in 81ms
+ POST /dashboard 200 in 131ms
+ GET /dashboard/explore 200 in 64ms
+ POST /dashboard/explore 200 in 75ms
+ POST /dashboard/explore 200 in 60ms
+ POST /dashboard/explore 200 in 62ms
+ POST /dashboard/explore 200 in 89ms
+ POST /dashboard/explore 200 in 96ms
+ GET /dashboard 200 in 57ms
+ POST /dashboard 200 in 66ms
+ POST /dashboard 200 in 57ms
+ POST /dashboard 200 in 63ms
+ POST /dashboard 200 in 83ms
+ POST /dashboard 200 in 73ms
+ POST /dashboard 200 in 58ms
+ POST /dashboard 200 in 73ms
+ POST /dashboard 200 in 63ms
+ GET /dashboard/explore 200 in 52ms
+ POST /dashboard/explore 200 in 78ms
+ POST /dashboard/explore 200 in 67ms
+ GET /dashboard 200 in 53ms
+ POST /dashboard 200 in 73ms
+ POST /dashboard 200 in 70ms
+ POST /dashboard 200 in 56ms
+ POST /dashboard 200 in 52ms
+ POST /dashboard 200 in 71ms
+ POST /dashboard 200 in 86ms
+ POST /dashboard 200 in 66ms
+ POST /dashboard 200 in 66ms
+ GET /dashboard/explore 200 in 95ms
+ POST /dashboard/explore 200 in 108ms
+ POST /dashboard/explore 200 in 72ms
+ ✓ Compiled in 447ms (954 modules)
+ GET /dashboard/explore 200 in 83ms
+ ✓ Compiled in 276ms (954 modules)
+ GET /dashboard/explore 200 in 74ms
+ POST /dashboard/explore 200 in 220ms
+ POST /dashboard/explore 200 in 56ms
+ POST /dashboard/explore 200 in 94ms
+ POST /dashboard/explore 200 in 87ms
+ POST /dashboard/explore 200 in 78ms
+ GET /dashboard 200 in 59ms
+ POST /dashboard 200 in 78ms
+ POST /dashboard 200 in 66ms
+ POST /dashboard 200 in 62ms
+ POST /dashboard 200 in 72ms
+ POST /dashboard 200 in 70ms
+ POST /dashboard 200 in 64ms
+ POST /dashboard 200 in 78ms
+ POST /dashboard 200 in 79ms
+ GET /dashboard 200 in 363ms
+ POST /dashboard 200 in 62ms
+ POST /dashboard 200 in 65ms
+ POST /dashboard 200 in 56ms
+ POST /dashboard 200 in 64ms
+ POST /dashboard 200 in 80ms
+ POST /dashboard 200 in 72ms
+ POST /dashboard 200 in 62ms
+ POST /dashboard 200 in 54ms
+ GET /dashboard/explore 200 in 59ms
+ POST /dashboard/explore 200 in 59ms
+ POST /dashboard/explore 200 in 73ms
+ POST /dashboard/explore 200 in 74ms
+ POST /dashboard/explore 200 in 64ms
+ POST /dashboard/explore 200 in 73ms

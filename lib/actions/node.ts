@@ -106,7 +106,11 @@ export async function listNodes(
 
 export async function updateNode(
   nodeId: string,
-  updates: Partial<Omit<Node, 'id' | 'user_id' | 'created_at' | 'updated_at'>>
+  updates: Partial<Omit<Node, 'id' | 'user_id' | 'created_at' | 'updated_at'>> & {
+    status?: string | null
+    priority?: Priority | null
+    due_date?: string | null
+  }
 ) {
   const supabase = await createClient()
 

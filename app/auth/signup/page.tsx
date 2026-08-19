@@ -7,6 +7,7 @@ import { useState } from 'react'
 
 export default function SignUpPage() {
   const router = useRouter()
+  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -17,6 +18,11 @@ export default function SignUpPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError(null)
+
+    if (!name.trim()) {
+      setError('이름을 입력해주세요.')
+      return
+    }
 
     if (password !== confirmPassword) {
       setError('비밀번호가 일치하지 않습니다.')
@@ -31,7 +37,7 @@ export default function SignUpPage() {
     setIsLoading(true)
 
     try {
-      const result = await signUp(email, password)
+      const result = await signUp(email, password, name)
 
       if (result.error) {
         setError(result.error)
@@ -77,6 +83,22 @@ export default function SignUpPage() {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-5">
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-2">
+                이름 *
+              </label>
+              <input
+                id="name"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                disabled={isLoading}
+                required
+                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-slate-50 disabled:cursor-not-allowed transition"
+                placeholder="이름을 입력하세요"
+              />
+            </div>
+
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2">
                 이메일
