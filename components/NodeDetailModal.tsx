@@ -189,8 +189,8 @@ export function NodeDetailModal({ nodeId, isOpen, onClose }: NodeDetailModalProp
 
   if (isLoading) {
     return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-        <div className="bg-white dark:bg-slate-800 rounded-lg w-full max-w-2xl max-h-[90vh] overflow-hidden flex flex-col">
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end md:items-center justify-center z-50 p-0 md:p-4">
+        <div className="bg-white dark:bg-slate-800 rounded-t-lg md:rounded-lg w-full md:max-w-2xl max-h-[90vh] overflow-hidden flex flex-col md:max-h-[90vh]">
           <div className="p-6 space-y-4">
             <div className="h-8 bg-slate-200 dark:bg-slate-700 rounded w-1/3 animate-pulse" />
             <div className="h-32 bg-slate-200 dark:bg-slate-700 rounded animate-pulse" />
@@ -203,15 +203,15 @@ export function NodeDetailModal({ nodeId, isOpen, onClose }: NodeDetailModalProp
 
   if (error && !node) {
     return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-        <div className="bg-white dark:bg-slate-800 rounded-lg w-full max-w-2xl p-6">
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end md:items-center justify-center z-50 p-0 md:p-4">
+        <div className="bg-white dark:bg-slate-800 rounded-t-lg md:rounded-lg w-full md:max-w-2xl p-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-semibold text-slate-900 dark:text-white">오류</h2>
+            <h2 className="text-lg md:text-xl font-semibold text-slate-900 dark:text-white">오류</h2>
             <button onClick={onClose} className="text-slate-400 hover:text-slate-600">
               <X size={24} />
             </button>
           </div>
-          <p className="text-red-700 dark:text-red-200">{error}</p>
+          <p className="text-red-700 dark:text-red-200 text-sm">{error}</p>
         </div>
       </div>
     )
@@ -224,52 +224,52 @@ export function NodeDetailModal({ nodeId, isOpen, onClose }: NodeDetailModalProp
 
   return (
     <>
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-        <div className="bg-white dark:bg-slate-800 rounded-lg w-full max-w-2xl max-h-[90vh] overflow-hidden flex flex-col">
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end md:items-center justify-center z-50 p-0 md:p-4 overflow-y-auto">
+        <div className="bg-white dark:bg-slate-800 rounded-t-lg md:rounded-lg w-full md:max-w-2xl h-screen md:h-auto md:max-h-[90vh] overflow-hidden flex flex-col">
           {/* 헤더 */}
-          <div className="flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-700">
-            <div className="flex-1">
-              <h2 className="text-2xl font-bold text-slate-900 dark:text-white line-clamp-2">
+          <div className="flex items-start justify-between p-4 md:p-6 border-b border-slate-200 dark:border-slate-700 gap-2 flex-shrink-0">
+            <div className="flex-1 min-w-0">
+              <h2 className="text-lg md:text-2xl font-bold text-slate-900 dark:text-white line-clamp-2 break-words">
                 {formData.title}
               </h2>
             </div>
-            <div className="flex gap-2 ml-4">
+            <div className="flex gap-1 md:gap-2 flex-shrink-0">
               {!isEditing && (
                 <>
                   <button
                     onClick={() => setIsEditing(true)}
-                    className="p-2 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900 rounded transition"
+                    className="p-1.5 md:p-2 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900 rounded transition"
                   >
-                    <Edit size={20} />
+                    <Edit size={18} className="md:w-5 md:h-5" />
                   </button>
                   <button
                     onClick={handleDelete}
                     disabled={isDeleting}
-                    className="p-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900 rounded transition disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="p-1.5 md:p-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900 rounded transition disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    <Trash2 size={20} />
+                    <Trash2 size={18} className="md:w-5 md:h-5" />
                   </button>
                 </>
               )}
               {isEditing && (
                 <button
                   onClick={handleSave}
-                  className="p-2 text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900 rounded transition"
+                  className="p-1.5 md:p-2 text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900 rounded transition"
                 >
-                  <Save size={20} />
+                  <Save size={18} className="md:w-5 md:h-5" />
                 </button>
               )}
               <button
                 onClick={onClose}
-                className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition"
+                className="p-1.5 md:p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition"
               >
-                <X size={24} />
+                <X size={20} className="md:w-6 md:h-6" />
               </button>
             </div>
           </div>
 
           {/* 콘텐츠 */}
-          <div className="flex-1 overflow-y-auto p-6 space-y-4">
+          <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-3 md:space-y-4">
             {error && (
               <div className="p-3 bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-800 rounded">
                 <p className="text-red-700 dark:text-red-200 text-sm">{error}</p>
@@ -285,7 +285,7 @@ export function NodeDetailModal({ nodeId, isOpen, onClose }: NodeDetailModalProp
 
             {isEditing ? (
               // 편집 모드
-              <div className="space-y-4">
+              <div className="space-y-3 md:space-y-4">
                 {/* 타입 선택 */}
                 <div>
                   <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">
@@ -294,7 +294,7 @@ export function NodeDetailModal({ nodeId, isOpen, onClose }: NodeDetailModalProp
                   <select
                     value={formData.type}
                     onChange={(e) => setFormData((prev) => ({ ...prev, type: e.target.value as NodeType }))}
-                    className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-sm"
+                    className="w-full px-2.5 md:px-3 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-sm"
                   >
                     {nodeTypes.map((type) => (
                       <option key={type} value={type}>
@@ -314,7 +314,7 @@ export function NodeDetailModal({ nodeId, isOpen, onClose }: NodeDetailModalProp
                     value={formData.title}
                     onChange={(e) => setFormData((prev) => ({ ...prev, title: e.target.value }))}
                     placeholder="제목을 입력해주세요."
-                    className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-slate-400 dark:placeholder-slate-500 text-sm"
+                    className="w-full px-2.5 md:px-3 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-slate-400 dark:placeholder-slate-500 text-sm"
                   />
                 </div>
 
@@ -327,7 +327,7 @@ export function NodeDetailModal({ nodeId, isOpen, onClose }: NodeDetailModalProp
                     value={formData.content}
                     onChange={(e) => setFormData((prev) => ({ ...prev, content: e.target.value }))}
                     placeholder="자세한 내용을 입력해주세요."
-                    className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition resize-none placeholder-slate-400 dark:placeholder-slate-500 text-sm"
+                    className="w-full px-2.5 md:px-3 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition resize-none placeholder-slate-400 dark:placeholder-slate-500 text-sm"
                     rows={3}
                   />
                 </div>
@@ -342,7 +342,7 @@ export function NodeDetailModal({ nodeId, isOpen, onClose }: NodeDetailModalProp
                     value={formData.summary}
                     onChange={(e) => setFormData((prev) => ({ ...prev, summary: e.target.value }))}
                     placeholder="요약을 입력해주세요."
-                    className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-slate-400 dark:placeholder-slate-500 text-sm"
+                    className="w-full px-2.5 md:px-3 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-slate-400 dark:placeholder-slate-500 text-sm"
                   />
                 </div>
 
@@ -363,12 +363,12 @@ export function NodeDetailModal({ nodeId, isOpen, onClose }: NodeDetailModalProp
                         }
                       }}
                       placeholder="태그 입력..."
-                      className="flex-1 px-3 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-slate-400 dark:placeholder-slate-500 text-sm"
+                      className="flex-1 px-2.5 md:px-3 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-slate-400 dark:placeholder-slate-500 text-sm"
                     />
                     <button
                       type="button"
                       onClick={handleAddTag}
-                      className="px-3 py-2 bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-white rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition text-sm"
+                      className="px-2.5 md:px-3 py-2 bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-white rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition text-sm"
                     >
                       추가
                     </button>
@@ -390,7 +390,7 @@ export function NodeDetailModal({ nodeId, isOpen, onClose }: NodeDetailModalProp
                 </div>
 
                 {/* 상태, 우선순위, 예정일 */}
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                   <div>
                     <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">
                       상태
@@ -400,7 +400,7 @@ export function NodeDetailModal({ nodeId, isOpen, onClose }: NodeDetailModalProp
                       value={formData.status}
                       onChange={(e) => setFormData((prev) => ({ ...prev, status: e.target.value }))}
                       placeholder="상태..."
-                      className="w-full px-2 py-1 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-slate-400 dark:placeholder-slate-500 text-xs"
+                      className="w-full px-2 md:px-2.5 py-1.5 md:py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-slate-400 dark:placeholder-slate-500 text-xs md:text-sm"
                     />
                   </div>
                   <div>
@@ -410,7 +410,7 @@ export function NodeDetailModal({ nodeId, isOpen, onClose }: NodeDetailModalProp
                     <select
                       value={formData.priority}
                       onChange={(e) => setFormData((prev) => ({ ...prev, priority: e.target.value }))}
-                      className="w-full px-2 py-1 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-xs"
+                      className="w-full px-2 md:px-2.5 py-1.5 md:py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-xs md:text-sm"
                     >
                       <option value="">선택</option>
                       <option value="low">낮음</option>
@@ -419,7 +419,7 @@ export function NodeDetailModal({ nodeId, isOpen, onClose }: NodeDetailModalProp
                       <option value="urgent">긴급</option>
                     </select>
                   </div>
-                  <div>
+                  <div className="col-span-2 md:col-span-1">
                     <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">
                       예정일
                     </label>
@@ -427,7 +427,7 @@ export function NodeDetailModal({ nodeId, isOpen, onClose }: NodeDetailModalProp
                       type="date"
                       value={formData.dueDate}
                       onChange={(e) => setFormData((prev) => ({ ...prev, dueDate: e.target.value }))}
-                      className="w-full px-2 py-1 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-xs"
+                      className="w-full px-2 md:px-2.5 py-1.5 md:py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-xs md:text-sm"
                     />
                   </div>
                 </div>
@@ -554,28 +554,29 @@ export function NodeDetailModal({ nodeId, isOpen, onClose }: NodeDetailModalProp
           </div>
 
           {/* 푸터 */}
-          <div className="border-t border-slate-200 dark:border-slate-700 p-4 flex gap-2">
+          <div className="border-t border-slate-200 dark:border-slate-700 p-3 md:p-4 flex gap-2 flex-shrink-0 bg-white dark:bg-slate-800">
             {!isEditing && (
               <button
                 onClick={() => setIsAddRelationModalOpen(true)}
-                className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-200 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-800 transition text-sm"
+                className="flex-1 inline-flex items-center justify-center gap-1.5 md:gap-2 px-3 py-2 bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-200 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-800 transition text-xs md:text-sm font-medium"
               >
                 <Plus size={16} />
-                관련 항목 추가
+                <span className="hidden md:inline">관련 항목 추가</span>
+                <span className="md:hidden">추가</span>
               </button>
             )}
             {isEditing && (
               <>
                 <button
                   onClick={handleSave}
-                  className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 bg-green-600 hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-600 text-white rounded-lg transition text-sm"
+                  className="flex-1 inline-flex items-center justify-center gap-1.5 md:gap-2 px-3 py-2 bg-green-600 hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-600 text-white rounded-lg transition text-xs md:text-sm font-medium"
                 >
                   <Save size={16} />
-                  저장
+                  <span className="hidden md:inline">저장</span>
                 </button>
                 <button
                   onClick={() => setIsEditing(false)}
-                  className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 bg-slate-200 hover:bg-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-900 dark:text-white rounded-lg transition text-sm"
+                  className="flex-1 inline-flex items-center justify-center gap-1.5 md:gap-2 px-3 py-2 bg-slate-200 hover:bg-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-900 dark:text-white rounded-lg transition text-xs md:text-sm font-medium"
                 >
                   취소
                 </button>
