@@ -1,13 +1,16 @@
 'use client'
 
+import { useState } from 'react'
 import { Node } from '@/types/node'
-import Link from 'next/link'
+import { NodeDetailModal } from '@/components/NodeDetailModal'
 
 interface NodeCardProps {
   node: Node
 }
 
 export function NodeCard({ node }: NodeCardProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   // 타입별 색상
   const typeColors: Record<string, { bg: string; text: string }> = {
     task: { bg: 'bg-blue-50', text: 'text-blue-700' },
@@ -35,8 +38,11 @@ export function NodeCard({ node }: NodeCardProps) {
   const label = typeLabels[node.type] || node.type
 
   return (
-    <Link href={`/nodes/${node.id}`}>
-      <div className="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 hover:shadow-md transition p-4 cursor-pointer">
+    <>
+      <button
+        onClick={() => setIsModalOpen(true)}
+        className="w-full text-left bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 hover:shadow-md transition p-4 cursor-pointer"
+      >
         <div className="flex items-start justify-between gap-3 mb-3">
           <h3 className="text-lg font-semibold text-slate-900 dark:text-white line-clamp-2 flex-1">
             {node.title}
@@ -84,7 +90,14 @@ export function NodeCard({ node }: NodeCardProps) {
             })}
           </time>
         </div>
-      </div>
-    </Link>
+      </button>
+
+      {/* Node Detail Modal */}
+      <NodeDetailModal
+        nodeId={node.id}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
+    </>
   )
 }
