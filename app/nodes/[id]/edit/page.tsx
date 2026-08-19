@@ -50,6 +50,13 @@ export default function NodeEditPage() {
       try {
         setIsLoading(true)
         const nodeData = await getNode(nodeId)
+
+        if (!nodeData) {
+          setError('삭제된 항목입니다.')
+          setIsLoading(false)
+          return
+        }
+
         setNode(nodeData)
         setFormData({
           type: nodeData.type,

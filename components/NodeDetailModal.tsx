@@ -7,8 +7,18 @@ import { getRelations, deleteRelation } from '@/lib/actions/relation'
 import { useNodeStore } from '@/lib/stores/nodeStore'
 import { AddRelationModal } from '@/components/AddRelationModal'
 import { X, Edit, Trash2, Plus, Save, ChevronDown, ChevronUp } from 'lucide-react'
+import { RelationType } from '@/types/node'
 
 const nodeTypes: NodeType[] = ['task', 'note', 'book', 'place', 'study', 'project', 'idea', 'person']
+
+const relationLabels: Record<RelationType, string> = {
+  related_to: '관련됨',
+  requires: '필요함',
+  inspired_by: '영감받음',
+  part_of: '포함됨',
+  derived_from: '파생됨',
+  recommended: '추천됨',
+}
 
 const typeLabels: Record<NodeType, string> = {
   task: '할 일',
@@ -79,6 +89,14 @@ export function NodeDetailModal({ nodeId, isOpen, onClose }: NodeDetailModalProp
           getNode(nodeId),
           getRelations(nodeId),
         ])
+
+        // 삭제된 노드 확인
+        if (!nodeData) {
+          setError('삭제된 항목입니다.')
+          setIsLoading(false)
+          return
+        }
+
         setNode(nodeData)
         setRelations(relationsData)
         setFormData({
@@ -528,23 +546,42 @@ export function NodeDetailModal({ nodeId, isOpen, onClose }: NodeDetailModalProp
                       관련 항목 ({relations.length})
                     </button>
                     {expandedSections.relations && (
-                      <div className="mt-2 space-y-2">
-                        {relations.map((relation) => (
-                          <div
-                            key={relation.id}
-                            className="p-2 bg-slate-50 dark:bg-slate-700 rounded border border-slate-200 dark:border-slate-600 flex justify-between items-center"
-                          >
-                            <span className="text-xs text-slate-600 dark:text-slate-400">
-                              {relation.from_node_id === nodeId ? '→' : '←'} {relation.relation_type}
-                            </span>
-                            <button
-                              onClick={() => handleDeleteRelation(relation)}
-                              className="text-slate-500 dark:text-slate-400 hover:text-red-600 dark:hover:text-red-400 transition"
+                      <div className="mt-2 space-y-3">
+                        {relations.map((relation: any) => {
+                          const isOutgoing = relation.from_node_id === nodeId
+                          const relatedNode = relation.relatedNode
+                          const relationType = relation.relation_type as RelationType
+
+                          return (
+                            <div
+                              key={relation.id}
+                              className="p-3 bg-slate-50 dark:bg-slate-700 rounded border border-slate-200 dark:border-slate-600"
                             >
-                              ✕
-                            </button>
-                          </div>
-                        ))}
+                              <div className="flex justify-between items-start gap-2">
+                                <div className="flex-1 min-w-0">
+                                  <div className="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1">
+                                    {isOutgoing ? '→' : '←'} {relationLabels[relationType] || relationType}
+                                  </div>
+                                  <div className="text-sm text-slate-900 dark:text-slate-100 font-medium line-clamp-2 break-words">
+                                    {relatedNode?.title || '(삭제됨)'}
+                                  </div>
+                                  {relatedNode?.type && (
+                                    <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                                      {typeLabels[relatedNode.type as NodeType] || relatedNode.type}
+                                    </div>
+                                  )}
+                                </div>
+                                <button
+                                  onClick={() => handleDeleteRelation(relation)}
+                                  className="text-slate-500 dark:text-slate-400 hover:text-red-600 dark:hover:text-red-400 transition flex-shrink-0"
+                                  title="삭제"
+                                >
+                                  ✕
+                                </button>
+                              </div>
+                            </div>
+                          )
+                        })}
                       </div>
                     )}
                   </div>

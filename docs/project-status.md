@@ -1,7 +1,7 @@
 # SecondBrain - 프로젝트 진행 상태
 
 **마지막 업데이트**: 2026-08-19  
-**현재 세션**: Session 3 - 마무리  
+**현재 세션**: Session 3 - 진행 중 (UI/UX 개선)  
 **전체 진행도**: 75% (Phase 1-7 완료)
 
 ---
@@ -67,6 +67,40 @@
   - 다크모드 완전 지원
   - 반응형 UI
   - 타입 체크 및 린트 통과
+
+---
+
+## 🔧 Session 3 추가 작업 (UI/UX 개선)
+
+### 구현된 기능
+1. **비밀번호 입력 필드 수정** (`app/auth/login/page.tsx`, `app/auth/signup/page.tsx`)
+   - 비밀번호 텍스트 색상 추가 (text-slate-900)
+
+2. **Dashboard 최근 항목 개선**
+   - 최근 항목 6개로 증가
+   - 우선순위별 색상 표시 (긴급-빨강, 높음-주황, 중간-노랑, 낮음-초록)
+   - 예정일을 D-XX 형식으로 표시
+   - 노드 변경사항 자동 반영 (Zustand store 감시)
+
+3. **오늘 D-DAY & 예정된 항목 개선**
+   - 타입 제한 제거 → 모든 타입의 D-day 항목 표시
+   - 모달 닫힐 때 Dashboard 자동 새로고침
+
+4. **"모두 보기" 링크 개선**
+   - `/dashboard/explore?filter=today` 추가
+   - `/dashboard/explore?filter=upcoming` 추가
+   - Explore 페이지에서 필터 적용
+
+5. **삭제된 노드 처리**
+   - `getNode()` → `.maybeSingle()` 변경
+   - null 체크 추가 (NodeDetailModal, Edit 페이지)
+   - 모달 닫힐 때 Dashboard 새로고침
+
+6. **관련 항목 UI 개선**
+   - getRelations에 노드 정보 포함 (제목, 타입)
+   - 관련 항목 카드 디자인 개선
+   - ID 대신 실제 노드 제목 표시
+   - 노드 타입 표시
 
 ---
 
@@ -201,16 +235,21 @@ types/
 
 #### 구현 완료
 - [x] Dashboard 홈 개선 (`/app/dashboard/page.tsx`)
-- [x] 오늘 할 일 섹션
-- [x] 예정된 할 일 섹션 (향후 30일)
+- [x] 오늘 D-DAY 섹션 (모든 타입 지원)
+- [x] 예정된 항목 섹션 (향후 30일, 모든 타입)
 - [x] 진행 중인 프로젝트 섹션
-- [x] 최근 항목 섹션
+- [x] 최근 항목 섹션 (6개)
 - [x] Quick Capture 버튼 추가
 - [x] Quick Capture 모달 팝업
 - [x] Ctrl+Enter 단축키
 - [x] 반응형 UI
 - [x] 다크모드 완전 지원
 - [x] 타입 체크 및 린트 통과
+- [x] 우선순위별 색상 표시 (긴급/높음/중간/낮음)
+- [x] 예정일 D-XX 형식 표시
+- [x] 노드 변경사항 자동 반영
+- [x] 삭제된 노드 에러 처리
+- [x] 관련 항목 UI 개선 (노드 제목 표시)
 
 ### Phase 8 - AI Integration (우선순위: 중간)
 - [ ] 자동 Type 제안

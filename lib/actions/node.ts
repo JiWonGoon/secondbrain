@@ -58,13 +58,13 @@ export async function getNode(nodeId: string) {
     .from('nodes')
     .select('*')
     .eq('id', nodeId)
-    .single()
+    .maybeSingle()
 
   if (error) {
     throw new Error(`Node 조회 실패: ${error.message}`)
   }
 
-  return data as Node
+  return data as Node | null
 }
 
 export async function listNodes(
@@ -201,12 +201,11 @@ export async function getTodayTasks() {
   const { data, error } = await supabase
     .from('nodes')
     .select('*')
-    .eq('type', 'task')
     .eq('due_date', today)
     .order('priority', { ascending: false })
 
   if (error) {
-    throw new Error(`오늘 할 일 조회 실패: ${error.message}`)
+    throw new Error(`오늘 항목 조회 실패: ${error.message}`)
   }
 
   return data as Node[]
@@ -223,14 +222,13 @@ export async function getUpcomingTasks() {
   const { data, error } = await supabase
     .from('nodes')
     .select('*')
-    .eq('type', 'task')
     .gt('due_date', today)
     .lte('due_date', thirtyDaysLater)
     .order('due_date', { ascending: true })
     .limit(10)
 
   if (error) {
-    throw new Error(`예정된 할 일 조회 실패: ${error.message}`)
+    throw new Error(`예정된 항목 조회 실패: ${error.message}`)
   }
 
   return data as Node[]

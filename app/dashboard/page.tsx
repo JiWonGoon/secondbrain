@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { getTodayTasks, getUpcomingTasks, getRecentNodes, getActiveProjects, createNode } from '@/lib/actions/node'
+import { useNodeStore } from '@/lib/stores/nodeStore'
 import { NodeCard } from '@/components/NodeCard'
 import { ChevronRight, Plus, X } from 'lucide-react'
 
@@ -16,6 +17,7 @@ export default function DashboardPage() {
   const [showQuickCapture, setShowQuickCapture] = useState(false)
   const [quickCaptureText, setQuickCaptureText] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const nodeStoreNodes = useNodeStore((state) => state.nodes)
 
   // Quick Capture 제출
   const handleQuickCapture = async () => {
@@ -51,7 +53,7 @@ export default function DashboardPage() {
       const [today, upcoming, recent, projects] = await Promise.all([
         getTodayTasks(),
         getUpcomingTasks(),
-        getRecentNodes(5),
+        getRecentNodes(6),
         getActiveProjects(),
       ])
 
@@ -69,6 +71,21 @@ export default function DashboardPage() {
   useEffect(() => {
     loadDashboardData()
   }, [])
+
+  // 노드 스토어 변경 감지 - 타입, 태그, 우선순위, 예정일 변경 시 최근 항목 새로고침
+  useEffect(() => {
+    // 스토어의 노드가 변경되면 최근 항목 새로고침
+    const refreshRecentNodes = async () => {
+      try {
+        const updated = await getRecentNodes(6)
+        setRecentNodes(updated)
+      } catch (err) {
+        console.error('Failed to refresh recent nodes:', err)
+      }
+    }
+    refreshRecentNodes()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [nodeStoreNodes])
 
   if (isLoading) {
     return (
@@ -170,12 +187,12 @@ export default function DashboardPage() {
         </div>
       )}
 
-      {/* 오늘 할 일 */}
+      {/* 오늘 D-day */}
       <section>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-semibold text-slate-900 dark:text-white">오늘 할 일</h2>
+          <h2 className="text-xl font-semibold text-slate-900 dark:text-white">오늘 D-DAY</h2>
           <Link
-            href="/dashboard/search"
+            href="/dashboard/explore?filter=today"
             className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 flex items-center gap-1 transition"
           >
             모두 보기
@@ -185,33 +202,23 @@ export default function DashboardPage() {
 
         {todayTasks.length === 0 ? (
           <div className="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-6 text-center">
-            <p className="text-slate-600 dark:text-slate-400">오늘 할 일이 없습니다.</p>
+            <p className="text-slate-600 dark:text-slate-400">오늘 D-DAY가 없습니다.</p>
           </div>
         ) : (
-          <div className="space-y-2">
-            {todayTasks.map((task) => (
-              <div
-                key={task.id}
-                className="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-4 hover:border-blue-300 dark:hover:border-blue-600 transition"
-              >
-                <p className="text-slate-900 dark:text-white font-medium">{task.title}</p>
-                {task.priority && (
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                    우선순위: {task.priority}
-                  </p>
-                )}
-              </div>
+          <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+            {todayTasks.map((item) => (
+              <NodeCard key={item.id} node={item} onRefresh={loadDashboardData} />
             ))}
           </div>
         )}
       </section>
 
-      {/* 예정된 할 일 */}
+      {/* 예정된 항목 */}
       <section>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-semibold text-slate-900 dark:text-white">예정된 할 일</h2>
+          <h2 className="text-xl font-semibold text-slate-900 dark:text-white">예정된 항목</h2>
           <Link
-            href="/dashboard/search"
+            href="/dashboard/explore?filter=upcoming"
             className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 flex items-center gap-1 transition"
           >
             모두 보기
@@ -221,28 +228,13 @@ export default function DashboardPage() {
 
         {upcomingTasks.length === 0 ? (
           <div className="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-6 text-center">
-            <p className="text-slate-600 dark:text-slate-400">예정된 할 일이 없습니다.</p>
+            <p className="text-slate-600 dark:text-slate-400">예정된 항목이 없습니다.</p>
           </div>
         ) : (
-          <div className="space-y-2">
-            {upcomingTasks.map((task) => {
-              const dueDate = new Date(task.due_date).toLocaleDateString('ko-KR', {
-                month: 'short',
-                day: 'numeric',
-              })
-
-              return (
-                <div
-                  key={task.id}
-                  className="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-4 hover:border-blue-300 dark:hover:border-blue-600 transition flex items-center justify-between"
-                >
-                  <p className="text-slate-900 dark:text-white font-medium">{task.title}</p>
-                  <span className="text-xs bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-200 px-2 py-1 rounded">
-                    {dueDate}
-                  </span>
-                </div>
-              )
-            })}
+          <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+            {upcomingTasks.map((item) => (
+              <NodeCard key={item.id} node={item} onRefresh={loadDashboardData} />
+            ))}
           </div>
         )}
       </section>
@@ -299,7 +291,7 @@ export default function DashboardPage() {
         ) : (
           <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
             {recentNodes.map((node) => (
-              <NodeCard key={node.id} node={node} />
+              <NodeCard key={node.id} node={node} onRefresh={loadDashboardData} />
             ))}
           </div>
         )}

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { NodeType } from '@/types/node'
 import { listNodes } from '@/lib/actions/node'
 import { NodeCard } from '@/components/NodeCard'
@@ -39,6 +40,9 @@ interface NodeStats {
 }
 
 export default function ExplorePage() {
+  const searchParams = useSearchParams()
+  const filter = searchParams.get('filter')
+
   const [nodes, setNodes] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -54,16 +58,47 @@ export default function ExplorePage() {
 
       try {
         const data = await listNodes()
-        setNodes(data)
+
+        // filter 쿼리 파라미터에 따라 필터 적용
+        let filteredData = data
+        if (filter === 'today') {
+          // 오늘 D-day: 타입 상관없이 due_date=오늘인 모든 항목
+          const today = new Date()
+          today.setHours(0, 0, 0, 0)
+          const tomorrow = new Date(today)
+          tomorrow.setDate(tomorrow.getDate() + 1)
+
+          filteredData = data.filter((node) => {
+            if (!node.due_date) return false
+            const dueDate = new Date(node.due_date)
+            dueDate.setHours(0, 0, 0, 0)
+            return dueDate.getTime() === today.getTime()
+          })
+        } else if (filter === 'upcoming') {
+          // 예정된 항목: 타입 상관없이 due_date > 오늘 & due_date <= 30일 뒤인 모든 항목
+          const today = new Date()
+          today.setHours(0, 0, 0, 0)
+          const thirtyDaysLater = new Date(today)
+          thirtyDaysLater.setDate(thirtyDaysLater.getDate() + 30)
+
+          filteredData = data.filter((node) => {
+            if (!node.due_date) return false
+            const dueDate = new Date(node.due_date)
+            dueDate.setHours(0, 0, 0, 0)
+            return dueDate.getTime() > today.getTime() && dueDate.getTime() <= thirtyDaysLater.getTime()
+          })
+        }
+
+        setNodes(filteredData)
 
         // 통계 계산
         const calculatedStats: NodeStats = {
-          total: data.length,
+          total: filteredData.length,
           byType: nodeTypes.reduce((acc, type) => {
-            acc[type] = data.filter((n) => n.type === type).length
+            acc[type] = filteredData.filter((n) => n.type === type).length
             return acc
           }, {} as Record<NodeType, number>),
-          byStatus: data.reduce(
+          byStatus: filteredData.reduce(
             (acc, node) => {
               if (node.status) {
                 acc[node.status] = (acc[node.status] || 0) + 1
@@ -72,7 +107,7 @@ export default function ExplorePage() {
             },
             {} as Record<string, number>
           ),
-          byPriority: data.reduce(
+          byPriority: filteredData.reduce(
             (acc, node) => {
               if (node.priority) {
                 acc[node.priority] = (acc[node.priority] || 0) + 1
@@ -91,7 +126,8 @@ export default function ExplorePage() {
     }
 
     fetchNodes()
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filter])
 
   // 정렬 적용
   const getSortedNodes = () => {

@@ -48,7 +48,26 @@ export async function getRelations(nodeId: string) {
     throw new Error(`Relation 조회 실패: ${error.message}`)
   }
 
-  return data as Relation[]
+  // 관련 노드들의 제목 정보를 함께 가져오기
+  const relationsWithNodes = await Promise.all(
+    (data as Relation[]).map(async (relation) => {
+      const relatedNodeId =
+        relation.from_node_id === nodeId ? relation.to_node_id : relation.from_node_id
+
+      const { data: nodeData } = await supabase
+        .from('nodes')
+        .select('id, title, type')
+        .eq('id', relatedNodeId)
+        .maybeSingle()
+
+      return {
+        ...relation,
+        relatedNode: nodeData || { id: relatedNodeId, title: '(삭제됨)', type: 'note' },
+      }
+    })
+  )
+
+  return relationsWithNodes as any[]
 }
 
 export async function deleteRelation(
