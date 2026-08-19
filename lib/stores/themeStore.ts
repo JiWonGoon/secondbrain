@@ -9,6 +9,30 @@ interface ThemeState {
   toggleTheme: () => void
 }
 
+function applyTheme(theme: Theme) {
+  if (typeof document === 'undefined') return
+
+  const root = document.documentElement
+
+  if (theme === 'system') {
+    root.removeAttribute('data-theme')
+    // 시스템 설정에 따라 dark 클래스 적용
+    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    if (isDark) {
+      root.classList.add('dark')
+    } else {
+      root.classList.remove('dark')
+    }
+  } else {
+    root.setAttribute('data-theme', theme)
+    if (theme === 'dark') {
+      root.classList.add('dark')
+    } else {
+      root.classList.remove('dark')
+    }
+  }
+}
+
 export const useThemeStore = create<ThemeState>()(
   persist(
     (set, get) => ({
@@ -26,16 +50,11 @@ export const useThemeStore = create<ThemeState>()(
     }),
     {
       name: 'theme-storage',
+      onRehydrateStorage: () => (state) => {
+        if (state) {
+          applyTheme(state.theme)
+        }
+      },
     }
   )
 )
-
-function applyTheme(theme: Theme) {
-  const root = document.documentElement
-
-  if (theme === 'system') {
-    root.removeAttribute('data-theme')
-  } else {
-    root.setAttribute('data-theme', theme)
-  }
-}
