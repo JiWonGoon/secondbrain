@@ -1,8 +1,8 @@
 # SecondBrain - 프로젝트 진행 상태
 
 **마지막 업데이트**: 2026-08-19  
-**현재 세션**: Session 2 - 완료  
-**전체 진행도**: 55% (Phase 1-5 완료 + Phase 6 진행 중)
+**현재 세션**: Session 3 - 진행 중  
+**전체 진행도**: 60% (Phase 1-6 완료)
 
 ---
 
@@ -38,11 +38,18 @@
 - 구현: Node Detail 모달, Edit (모달 내), Delete, Relation 추가/삭제
 - UI 개선: 모바일 완전 반응형, 모달 팝업 방식, 좌우 스크롤 제거
 
-### 🟡 Phase 6: Search & Filter - **⏳ 진행 중**
+### 🟢 Phase 6: Search & Filter - **✅ 완료**
 - 시작: 2026-08-19
-- 커밋: `8a93caf`, `3c53f8c`, `e000cad`, `c627a63`, `d86dc3f`
-- 완료: 검색 페이지 (/dashboard/search), 모든 필터 구현, 태그 검색
-- 남음: Explore 페이지, Dashboard 개선
+- 완료: 2026-08-19
+- 커밋: `8a93caf`, `3c53f8c`, `e000cad`, `c627a63`, `d86dc3f`, `122180e`
+- 구현:
+  - 검색 페이지 (`/dashboard/search`): 텍스트 검색 + 모든 필터
+  - Explore 페이지 (`/dashboard/explore`): 전체 항목 탐색 + 통계 + 정렬
+  - 필터: Type, Status, Priority, Tag, Due Date
+  - 정렬: 최신순, 오래된순, 최근 수정순, 제목순
+  - 태그 검색 지원
+  - 다크모드 완전 지원
+  - 모바일 반응형
 
 ---
 
@@ -200,37 +207,30 @@ types/
 
 ---
 
-## 🚀 다음 세션에서 시작할 작업
+## 🚀 다음 작업 (Phase 7 이후)
 
-### Phase 6 - Search & Filter 마무리 + Phase 7 시작
+### Phase 7 - Dashboard 개선 (우선순위: 높음)
+1. **대시보드 개선** (`/app/dashboard/page.tsx`)
+   - 오늘 할 일 (due_date 기준)
+   - 예정된 할 일 (다가오는 일정)
+   - 최근 추가 항목
+   - 최근 수정 항목
+   - 진행 중인 프로젝트
 
-#### Phase 6 남은 작업
-1. **Explore 페이지** (`/app/dashboard/explore/page.tsx`)
-   - 전체 항목 탐색 뷰
-   - 타입별 필터
-   - 상태별 필터
-   - 정렬 옵션 (생성일, 수정일, 우선순위)
-
-2. **검색 페이지 추가 개선**
-   - 최근 검색 저장
-   - 인기 검색어 (선택사항)
-
-### Phase 7 - Explore (우선순위: 중간)
-1. **Explore 페이지 구현** (`/app/dashboard/explore/page.tsx`)
 2. **필터 및 정렬 기능**
-3. **항목 그룹화/집계**
+3. **통계 위젯**
 
-### Phase 8 - Dashboard (우선순위: 중간)
-1. **오늘 할 일** (due_date 기준)
-2. **예정된 할 일** (다가오는 일정)
-3. **최근 추가/수정 항목**
-4. **진행 중인 프로젝트**
-5. **통계 위젯**
+### Phase 8 - AI Integration (우선순위: 중간)
+1. **자동 분류** (AI)
+2. **제목 제안** (AI)
+3. **요약 생성** (AI)
+4. **태그 추천** (AI)
+5. **관련 항목 추천** (AI)
 
-### 체크리스트 (Session 3)
-- [ ] Explore 페이지 구현
-- [ ] Dashboard 위젯 구현
-- [ ] 모바일 Explore UX 테스트
+### 체크리스트 (Session 3 이후)
+- [x] Phase 6 완료 (Explore 페이지 구현)
+- [ ] Phase 7 시작 (Dashboard 개선)
+- [ ] 모바일 Dashboard UX 테스트
 - [ ] 다크모드 UI 확인
 - [ ] 성능 최적화 (pagination 검토)
 
