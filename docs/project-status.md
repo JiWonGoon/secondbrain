@@ -2,7 +2,7 @@
 
 **마지막 업데이트**: 2026-08-19  
 **현재 세션**: Session 2  
-**전체 진행도**: 40% (Phase 1-4 + UI/UX 개선 완료)
+**전체 진행도**: 50% (Phase 1-5 완료)
 
 ---
 
@@ -32,9 +32,10 @@
 - 커밋: `00aa027`, `0f5519c`
 - 구현: 날짜/시간 표시, 다크모드/라이트모드 토글
 
-### 🟡 Phase 5: Node CRUD - **⏳ 진행 예정**
-- 상태: 준비 중
-- 다음: Node Detail 페이지부터 시작
+### 🟢 Phase 5: Node CRUD - **✅ 완료**
+- 완료: 2026-08-19
+- 커밋: `f6e489f`, `86a0072`
+- 구현: Node Detail, Edit, Delete, Relation 추가/삭제
 
 ---
 
@@ -140,14 +141,14 @@ types/
 
 ## 🔄 남은 작업
 
-### Phase 5 - Node CRUD (우선순위: 높음)
-- [ ] Node Detail 페이지 (`/nodes/[id]/page.tsx`)
-- [ ] Node Edit 기능
-- [ ] Node Delete 기능 (확인 모달)
-- [ ] Relation 추가 UI
-- [ ] Relation 삭제 UI
+### Phase 5 - Node CRUD (우선순위: 높음) ✅
+- [x] Node Detail 페이지 (`/nodes/[id]/page.tsx`)
+- [x] Node Edit 기능 (`/nodes/[id]/edit/page.tsx`)
+- [x] Node Delete 기능 (확인 모달)
+- [x] Relation 추가 UI (AddRelationModal)
+- [x] Relation 삭제 UI
 
-### Phase 6 - Search & Filter (우선순위: 중간)
+### Phase 6 - Search & Filter (우선순위: 중간) - **⏳ 준비 중**
 - [ ] 검색 기능 (PostgreSQL ILIKE)
 - [ ] Type 필터
 - [ ] Status 필터
@@ -192,51 +193,45 @@ types/
 
 ## 🚀 다음 세션에서 시작할 작업
 
-### Phase 5 - Node CRUD (즉시 시작 가능)
+### Phase 6 - Search & Filter (즉시 시작 가능)
 
-#### 1. Node Detail 페이지
+#### 1. 검색 페이지
 ```
-파일: /app/nodes/[id]/page.tsx
+파일: /app/search/page.tsx
 구현:
-- getNode 액션으로 데이터 로드
-- NodeCard와 유사한 스타일
-- 상세 정보 표시
-- 관련 항목 표시 (getRelations)
-- 수정/삭제 버튼
-```
-
-#### 2. Node Edit 기능
-```
-파일: /app/nodes/[id]/edit/page.tsx (또는 모달)
-구현:
-- updateNode 액션 연결
-- 제목, 내용, 태그, 상태 수정
-- 성공/에러 메시지
+- 검색 입력창
+- PostgreSQL ILIKE 기반 검색
+- 검색 결과 표시
+- 검색 쿼리 구현
 ```
 
-#### 3. Node Delete 기능
+#### 2. 필터 기능
 ```
+파일: /components/SearchFilters.tsx
 구현:
-- 삭제 확인 모달
-- deleteNode 액션 연결
-- 삭제 후 Inbox로 리다이렉트
+- Type 필터
+- Status 필터
+- Tag 필터
+- Priority 필터
+- Due Date 필터
+- 필터 조합 로직
 ```
 
-#### 4. Relation UI
+#### 3. Explore 페이지
 ```
+파일: /app/explore/page.tsx
 구현:
-- 관련 항목 추가 모달
-- createRelation 액션 연결
-- Relation 삭제 버튼
-- deleteRelation 액션 연결
+- 모든 항목 표시
+- 타입별 필터
+- 상태별 필터
+- 정렬 옵션 (생성일, 수정일, 우선순위)
 ```
 
 ### 체크리스트
-- [ ] Node Detail 페이지 구현
-- [ ] Node Edit 기능 구현
-- [ ] Node Delete 기능 구현
-- [ ] Relation UI 구현
-- [ ] 전체 CRUD 흐름 테스트
+- [ ] 검색 페이지 구현
+- [ ] 필터 기능 구현
+- [ ] Explore 페이지 구현
+- [ ] 검색 결과 테스트
 - [ ] 다크모드에서 UI 확인
 - [ ] 모바일 UX 확인
 
@@ -297,15 +292,20 @@ types/
 | **Phase 2** | ✅ 완료 |
 | **Phase 3** | ✅ 완료 |
 | **Phase 4** | ✅ 완료 |
+| **Phase 5** | ✅ 완료 |
 | **UI/UX 개선** | ✅ 완료 |
-| **Phase 5** | ⏳ 준비 중 |
-| **전체 진행도** | 🟢 **40% (Phase 1-4 + UI/UX 완료)** |
+| **Phase 6** | ⏳ 준비 중 |
+| **전체 진행도** | 🟢 **50% (Phase 1-5 완료)** |
 
 ---
 
 ## 📈 GitHub 커밋 히스토리
 
 ```
+f6e489f - Relation 추가/삭제 UI 구현
+86a0072 - Phase 5 - Node CRUD 구현 (Detail, Edit, Delete)
+9086d05 - Docker & DevOps 작업 항목 추가
+07e51b8 - 프로젝트 상태 정리 (Phase 1-4 완료, 40% 진행)
 0f5519c - 테마 토글 기능 수정
 00aa027 - UI/UX 개선사항 적용 (날짜/시간, 다크모드)
 e553c76 - Phase 4 - Inbox / Quick Capture 완료
@@ -316,4 +316,4 @@ aaa5375 - Phase 2 - Authentication 완료
 
 ---
 
-**다음 세션에서 Phase 5 - Node CRUD를 시작할 준비가 완료되었습니다!** 🚀
+**Phase 5 - Node CRUD가 완료되었습니다! 다음 세션에서 Phase 6 - Search & Filter를 시작합니다!** 🚀
