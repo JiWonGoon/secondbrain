@@ -17,23 +17,23 @@ export default function Home() {
               <div className="text-blue-400 text-2xl mb-2">📝</div>
               <h3 className="font-semibold text-white mb-2">빠른 입력</h3>
               <p className="text-slate-300 text-sm">
-                생각나는 것을 분류 없이 바로 저장
+                생각나는 것을 분류 없이 바로 저장하고 편집
               </p>
             </div>
 
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-              <div className="text-purple-400 text-2xl mb-2">🔗</div>
-              <h3 className="font-semibold text-white mb-2">자동 정리</h3>
+              <div className="text-purple-400 text-2xl mb-2">🔍</div>
+              <h3 className="font-semibold text-white mb-2">검색 & 필터</h3>
               <p className="text-slate-300 text-sm">
-                AI가 분류하고 태그를 제안
+                타입, 상태, 태그, 우선순위로 검색
               </p>
             </div>
 
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-              <div className="text-green-400 text-2xl mb-2">🎯</div>
-              <h3 className="font-semibold text-white mb-2">연결</h3>
+              <div className="text-green-400 text-2xl mb-2">🔗</div>
+              <h3 className="font-semibold text-white mb-2">항목 연결</h3>
               <p className="text-slate-300 text-sm">
-                관련된 정보를 자동으로 발견
+                관련된 항목끼리 관계를 만들고 추적
               </p>
             </div>
           </div>
