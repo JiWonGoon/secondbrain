@@ -3,8 +3,11 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { getTodayTasks, getUpcomingTasks, getRecentNodes, getActiveProjects, createNode } from '@/lib/actions/node'
+import { classifyNodeAction } from '@/lib/actions/ai'
 import { useNodeStore } from '@/lib/stores/nodeStore'
 import { NodeCard } from '@/components/NodeCard'
+import { ClassificationSuggestionModal } from '@/components/nodes/ClassificationSuggestionModal'
+import { ClassificationResult } from '@/lib/ai/classify'
 import { ChevronRight, Plus, X } from 'lucide-react'
 
 export default function DashboardPage() {
@@ -17,6 +20,9 @@ export default function DashboardPage() {
   const [showQuickCapture, setShowQuickCapture] = useState(false)
   const [quickCaptureText, setQuickCaptureText] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [showSuggestion, setShowSuggestion] = useState(false)
+  const [aiSuggestion, setAiSuggestion] = useState<ClassificationResult | null>(null)
+  const [isClassifying, setIsClassifying] = useState(false)
   const nodeStoreNodes = useNodeStore((state) => state.nodes)
 
   // Quick Capture 제출
@@ -26,21 +32,28 @@ export default function DashboardPage() {
     setIsSubmitting(true)
 
     try {
-      // 텍스트를 제목으로 사용하여 note 타입의 항목 생성
-      await createNode('note', quickCaptureText.trim(), '', {
-        summary: quickCaptureText.trim(),
-      })
+      // AI 분류 요청
+      setIsClassifying(true)
+      const classification = await classifyNodeAction(quickCaptureText.trim())
 
-      // 모달 닫기 및 입력 필드 초기화
-      setShowQuickCapture(false)
-      setQuickCaptureText('')
+      if (classification) {
+        setAiSuggestion(classification)
+        setShowSuggestion(true)
+      } else {
+        // AI 분류 실패 시 기본 저장
+        await createNode('note', quickCaptureText.trim(), quickCaptureText.trim(), {
+          summary: quickCaptureText.trim(),
+        })
 
-      // 대시보드 데이터 새로고침
-      await loadDashboardData()
+        setShowQuickCapture(false)
+        setQuickCaptureText('')
+        await loadDashboardData()
+      }
     } catch (err) {
       alert(err instanceof Error ? err.message : '항목 저장 실패')
     } finally {
       setIsSubmitting(false)
+      setIsClassifying(false)
     }
   }
 
@@ -326,6 +339,25 @@ export default function DashboardPage() {
           </Link>
         </div>
       </section>
+
+      {/* AI 분류 제안 모달 */}
+      <ClassificationSuggestionModal
+        isOpen={showSuggestion}
+        onClose={() => {
+          setShowSuggestion(false)
+          setAiSuggestion(null)
+        }}
+        onSuccess={() => {
+          setShowSuggestion(false)
+          setAiSuggestion(null)
+          setShowQuickCapture(false)
+          setQuickCaptureText('')
+          loadDashboardData()
+        }}
+        originalInput={quickCaptureText}
+        suggestion={aiSuggestion}
+        isLoading={isClassifying}
+      />
     </div>
   )
 }
