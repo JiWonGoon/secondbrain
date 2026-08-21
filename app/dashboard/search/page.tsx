@@ -371,7 +371,7 @@ export default function SearchPage() {
         ) : (
           <div className="grid gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {results.map((node) => (
-              <NodeCard key={node.id} node={node} />
+              <NodeCard key={node.id} node={node} onRefresh={handleSearch} />
             ))}
           </div>
         )}

@@ -152,14 +152,6 @@ export async function searchNodes(
 
   let queryBuilder = supabase.from('nodes').select('*')
 
-  // 텍스트 검색 (제목, 내용, 요약, 태그)
-  if (query.trim()) {
-    const searchTerm = `%${query}%`
-    queryBuilder = queryBuilder.or(
-      `title.ilike.${searchTerm},content.ilike.${searchTerm},summary.ilike.${searchTerm},tags.cs.{"${query}"}`
-    )
-  }
-
   // Type 필터
   if (filters?.type) {
     queryBuilder = queryBuilder.eq('type', filters.type)
@@ -192,6 +184,29 @@ export async function searchNodes(
 
   if (error) {
     throw new Error(`검색 실패: ${error.message}`)
+  }
+
+  // 텍스트 검색 (클라이언트 사이드에서 필터링)
+  // PostgREST or 연산자의 쉼표 파싱 문제를 피하기 위해 결과를 받은 후 필터링
+  if (query.trim()) {
+    const searchLower = query.toLowerCase()
+    // 검색어를 공백 또는 쉼표로 분리하여 각각 검색 (AND 검색)
+    const searchTerms = searchLower
+      .split(/[\s,]+/)
+      .map((term) => term.trim())
+      .filter((term) => term.length > 0)
+
+    return (data as Node[]).filter((node) => {
+      // 모든 검색어가 포함되어야 함 (AND 검색)
+      return searchTerms.every(
+        (term) =>
+          node.title.toLowerCase().includes(term) ||
+          node.content.toLowerCase().includes(term) ||
+          node.summary?.toLowerCase().includes(term) ||
+          // 태그 검색도 포함
+          node.tags?.some((tag) => tag.toLowerCase().includes(term))
+      )
+    })
   }
 
   return data as Node[]
