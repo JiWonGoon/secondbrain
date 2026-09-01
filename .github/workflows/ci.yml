@@ -1,0 +1,15 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    stops:
+      - name: Checkout
+        uses: actions/chckout@v4
+      - name: Hello
+        run: echo "GitHub Actions is working!"
