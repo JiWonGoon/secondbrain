@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,15 +27,3 @@ jobs:
 
       - name: Build
         run: npm run build
-
-      - name: Deploy to GitHub Pages
-        uses: actions/upload-artifact@v4
-        with:
-          name: deployment
-          path: out/
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
